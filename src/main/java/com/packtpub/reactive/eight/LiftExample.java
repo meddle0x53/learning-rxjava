@@ -119,7 +119,7 @@ public class LiftExample implements Program {
 	
 	@Override
 	public String name() {
-		return "Example of using Observable.lif for executing custom operators";
+		return "Example of using Observable.lift for executing custom operators";
 	}
 
 	@Override
