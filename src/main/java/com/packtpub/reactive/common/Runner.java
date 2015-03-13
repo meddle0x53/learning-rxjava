@@ -8,7 +8,10 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.functions.Action1;
+import rx.observables.GroupedObservable;
 
+import com.packtpub.reactive.eight.ComposeExample;
+import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
 import com.packtpub.reactive.five.CombiningObservablesExample;
 import com.packtpub.reactive.five.ConditionalsExample;
@@ -41,6 +44,22 @@ import com.packtpub.reactive.two.MonadsExample;
 import com.packtpub.reactive.two.ObservablesAndMonads;
 import com.packtpub.reactive.two.ReactiveSumWithLambdas;
 
+/**
+ * The main class of this project it is able to run all the examples.
+ * 
+ * <p>
+ * 	It is a command line application.
+ *  You can type commands to the main program and it will respond if they are valid.
+ * </p>
+ * <p>
+ *  The valid commands are:
+ * </p>
+ * <ul>
+ * 	<li><b>list</b> - Lists all the examples and their unique numbers.</li>
+ * </ul>
+ * 
+ * @author meddle
+ */
 public class Runner {
 
 	private final List<Program> programs = new ArrayList<Program>();
@@ -56,13 +75,31 @@ public class Runner {
 	}
 
 	public void listPrograms(String... params) {
-		Observable
+		Observable<Program> examples = Observable
 				.from(this.programs)
-				.distinct()
-				.map(program -> program.name())
-				.lift(new WithIndex<>())
-				.map(v -> v.getIndex() + ". " + v.getValue())
-				.subscribe(System.out::println, System.err::println,
+				.distinct();
+
+		Observable<String> firstParam = Observable.from(params).first();
+
+		Observable<GroupedObservable<Integer, String>> all = firstParam
+		.filter(type -> type.isEmpty() || type.equals("all"))
+		.flatMap(v -> examples.compose(new IndexAndGroupChapterExamples()));
+
+		Observable<GroupedObservable<Integer, String>> filteredByChapter = Observable.from(params)
+		.skip(1)
+		.map(Integer::parseInt)
+		.flatMap(param -> examples.compose(new IndexAndGroupChapterExamples())
+				.filter(obs -> obs.getKey() == param));
+		
+
+		Observable<GroupedObservable<Integer, String>> chapter = firstParam
+		.filter(type -> type.equals("chapter"))
+		.flatMap(v -> filteredByChapter);
+		
+		Observable<String> list = Observable.merge(all, chapter)
+				.flatMap(obs -> Observable.just("Chapter " + obs.getKey() + " : ").concatWith(obs));
+		
+		list.subscribe(System.out::println, System.err::println,
 						System.out::println);
 	}
 
@@ -119,9 +156,11 @@ public class Runner {
 		Observable<String> input = CreateObservable.input();
 
 		input.flatMap(
-				line -> Observable.zip(toActionObservable(line),
+				line -> Observable.zip(
+						toActionObservable(line),
 						toActionParamsObservable(line),
-						this::commandToActionRunner))
+						this::commandToActionRunner)
+						)
 				.cast(ActionRunner.class)
 				.subscribe(action -> action.run(),
 						e -> System.err.println(e.getMessage()),
@@ -154,7 +193,8 @@ public class Runner {
 
 	private static Runner init() {
 		Runner runner = new Runner();
-		runner.registerPrograms(new ReactiveSumExample(),
+		runner.registerPrograms(
+				new ReactiveSumExample(),
 				new IteratorExamples(), new IntroToLambdasExample(),
 				new ReactiveSumWithLambdas(), new FunctionsExample(),
 				new MonadsExample(), new ObservablesAndMonads(),
@@ -177,7 +217,10 @@ public class Runner {
 				new ParallelRequestsExample(),
 				new BufferingExamples(),
 				new BlockingExample(),
-				new ResourceManagementExample());
+				new ResourceManagementExample(),
+				new LiftExample(),
+				new ComposeExample()
+				);
 
 		return runner;
 	}
