@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Subscription;
 import rx.functions.Func1;
 import rx.functions.Func2;
 
@@ -16,15 +17,25 @@ public class ReactiveSumExample implements Program {
 	public static final class ReactiveSum implements Observer<Double> {
 
 		private double sum;
+		private Subscription subscription = null;
 
 		public ReactiveSum(Observable<Double> a, Observable<Double> b) {
 			this.sum = 0;
 
-			Observable.combineLatest(a, b, new Func2<Double, Double, Double>() {
+			subscribe(a, b);
+		}
+
+		private void subscribe(Observable<Double> a, Observable<Double> b) {
+			this.subscription = Observable.combineLatest(a, b, new Func2<Double, Double, Double>() {
 				public Double call(Double a, Double b) {
 					return a + b;
 				}
 			}).subscribe(this);
+			
+		}
+		
+		public void unsubscribe() {
+			this.subscription.unsubscribe();
 		}
 
 		public void onCompleted() {
@@ -84,7 +95,13 @@ public class ReactiveSumExample implements Program {
 		Observable<Double> a = varStream("a", input);
 		Observable<Double> b = varStream("b", input);
 
-		new ReactiveSum(a, b);
+		ReactiveSum sum = new ReactiveSum(a, b);
+		
+		input
+		.map(line -> line.trim())
+		.filter(line -> line.equals("return"))
+		.doOnNext(v -> System.out.println("Exiting 'Reactive Sum' example..."))
+		.subscribe(v -> sum.unsubscribe());
 	}
 
 	@Override
