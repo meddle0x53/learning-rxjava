@@ -50,12 +50,34 @@ import com.packtpub.reactive.two.ReactiveSumWithLambdas;
  * <p>
  * 	It is a command line application.
  *  You can type commands to the main program and it will respond if they are valid.
- * </p>
- * <p>
+ *  <br />
  *  The valid commands are:
  * </p>
+ * 
  * <ul>
- * 	<li><b>list</b> - Lists all the examples and their unique numbers.</li>
+ * 	<li>
+ * 		<b>list</b> - Lists a set of examples and their IDs.
+ * 		<ul>
+ * 			<li><i>list/list all</i> - Lists all the examples.</li>
+ * 			<li><i>list chapter [chapter_number1] [chapter_number2] ...</i> - Lists the examples of only those chapters, provided in the command.</li>
+ * 		</ul>
+ * 	</li>
+ * 	<li>
+ * 		<b>run</b> - Runs an by a provided ID.
+ * 		<ul>
+ * 			<li><i>run [example-id]</i> - Runs the given example. You can see the IDs of the examples with list.</li>
+ * 			<li>
+ * 				<i>run chapter [chapter_number] [sequential_number_in_chapter] ...</i> - Runs the nth example of the provided chapter.
+ * 				<p>
+ * 					An example is:
+ * 					<pre>
+ * 						run chapter 1 2
+ * 					</pre>
+ * 					This will run the second example in chapter one.
+ * 				</p>
+ * 			</li>
+ * 		</ul>
+ * 	</li>
  * </ul>
  * 
  * @author meddle
@@ -65,15 +87,35 @@ public class Runner {
 	private final List<Program> programs = new ArrayList<Program>();
 	private final Map<String, Action1<String[]>> actions = new HashMap<String, Action1<String[]>>();
 
+	/**
+	 * Constructs the Runner.
+	 */
 	public Runner() {
 		actions.put("list", this::listPrograms);
 		actions.put("run", this::runProgram);
 	}
 
+	/**
+	 * Registers programs to be run by this runner application.
+	 * 
+	 * @param programs
+	 * 			The programs to register.
+	 */
 	public void registerPrograms(Program... programs) {
 		this.programs.addAll(Arrays.asList(programs));
 	}
 
+	/**
+	 * Represents an user action. It is triggered on the <i>list</i> command.
+	 * 
+	 * @param params
+	 * 			Could be:
+	 * 			<ul>
+	 * 				<li>empty array - All the registered examples, grouped by chapters will be listed.</li>
+	 * 				<li>["all"] - The same as above.</li>
+	 * 				<li>["chapter", "chapter_number_1", ...] - The examples only of the chapters with the provided numbers will be listed.</li>
+	 * 			</ul>
+	 */
 	public void listPrograms(String... params) {
 		Observable<Program> examples = Observable
 				.from(this.programs)
@@ -103,10 +145,38 @@ public class Runner {
 						System.out::println);
 	}
 
+	/**
+	 * Represents an user action. It is triggered on the <i>run</i> command.
+	 * 
+	 * @param params
+	 * 			Could be:
+	 * 			<ul>
+	 * 				<li>["ID"] - The example with the passed id will be run.</li>
+	 * 				<li>["chapter", "chapter_number_1", "number_in_the_chapter"] - The [number_in_the_chapter] example of the given chapter will be run.</li>
+	 * 			</ul>
+	 */
 	public void runProgram(String... params) {
-		programFromParams(params).doOnNext(this::wellcome).subscribe(
+		programFromParams(params)
+		.doOnNext(this::wellcome)
+		.subscribe(
 				program -> program.run(),
-				e -> System.err.println(e.getMessage()));
+				e -> System.err.println(e.getMessage())
+				);
+	}
+	
+	public void run() {
+		Observable<String> input = CreateObservable.input();
+
+		input.flatMap(
+				line -> Observable.zip(
+						toActionObservable(line),
+						toActionParamsObservable(line),
+						this::commandToActionRunner)
+						)
+				.cast(ActionRunner.class)
+				.subscribe(action -> action.run(),
+						e -> System.err.println(e.getMessage()),
+						() -> System.out.println("End!"));
 	}
 
 	private Observable<Program> programFromParams(String... params) {
@@ -150,21 +220,6 @@ public class Runner {
 
 	private Observable<String> commands(String str) {
 		return Observable.from(str.split(" ")).map(command -> command.trim());
-	}
-
-	public void run() {
-		Observable<String> input = CreateObservable.input();
-
-		input.flatMap(
-				line -> Observable.zip(
-						toActionObservable(line),
-						toActionParamsObservable(line),
-						this::commandToActionRunner)
-						)
-				.cast(ActionRunner.class)
-				.subscribe(action -> action.run(),
-						e -> System.err.println(e.getMessage()),
-						() -> System.out.println("End!"));
 	}
 
 	private ActionRunner commandToActionRunner(Action1<String[]> command,
@@ -225,6 +280,7 @@ public class Runner {
 		return runner;
 	}
 
+	
 	public static void main(String[] args) {
 		Runner runner = init();
 
