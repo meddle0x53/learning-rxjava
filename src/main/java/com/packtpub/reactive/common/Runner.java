@@ -10,6 +10,8 @@ import rx.Observable;
 import rx.functions.Action1;
 import rx.observables.GroupedObservable;
 
+import com.packtpub.reactive.chapter01.ObservableVSIterator;
+import com.packtpub.reactive.chapter01.ReactiveSumV1;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -23,8 +25,6 @@ import com.packtpub.reactive.four.GroupingExamples;
 import com.packtpub.reactive.four.MappingExamples;
 import com.packtpub.reactive.four.OtherTransformationExample;
 import com.packtpub.reactive.four.ScanExamples;
-import com.packtpub.reactive.one.ObservableVSIterator;
-import com.packtpub.reactive.one.ReactiveSumV1;
 import com.packtpub.reactive.seven.BlockingExample;
 import com.packtpub.reactive.six.BufferingExamples;
 import com.packtpub.reactive.six.IntervalAndSchedulers;

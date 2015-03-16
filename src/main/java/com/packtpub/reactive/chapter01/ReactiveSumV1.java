@@ -1,5 +1,6 @@
-package com.packtpub.reactive.one;
+package com.packtpub.reactive.chapter01;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,19 +9,27 @@ import rx.Observer;
 import rx.Subscription;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.observables.ConnectableObservable;
 import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
 /**
- * A demonstration of how to implement a sum that updates automatically when any of its <> changes.
+ * A demonstration of how to implement a sum that updates automatically when any of its collectors changes.
  * 
  * @author meddle
  */
 public class ReactiveSumV1 implements Program {
-
+	
+	/**
+	 * The sum is just an Observer, which subscribes to a stream created by combining 'a' and 'b', via summing.
+	 * 
+	 * @author meddle
+	 */
 	public static final class ReactiveSum implements Observer<Double> {
+
+		private CountDownLatch latch = new CountDownLatch(1);
 
 		private double sum;
 		private Subscription subscription = null;
@@ -32,6 +41,8 @@ public class ReactiveSumV1 implements Program {
 		}
 
 		private void subscribe(Observable<Double> a, Observable<Double> b) {
+			// combineLatest creates an Observable, sending notifications on changes of either of its sources.
+			// This notifications are formed using a Func2.
 			this.subscription = Observable.combineLatest(a, b, new Func2<Double, Double, Double>() {
 				public Double call(Double a, Double b) {
 					return a + b;
@@ -41,10 +52,12 @@ public class ReactiveSumV1 implements Program {
 		
 		public void unsubscribe() {
 			this.subscription.unsubscribe();
+			this.latch.countDown();
 		}
 
 		public void onCompleted() {
 			System.out.println("Exiting last sum was : " + this.get());
+			this.latch.countDown();
 		}
 
 		public void onError(Throwable e) {
@@ -60,8 +73,17 @@ public class ReactiveSumV1 implements Program {
 		public double get() {
 			return this.sum;
 		}
+		
+		public CountDownLatch getLatch() {
+			return latch;
+		}
 	}
 
+	/**
+	 * The Observable returned by this method, only reacts to values in the form
+	 * <varName> = <value> or <varName> : <value>.
+	 * It emits the <value>.
+	 */
 	public static Observable<Double> varStream(final String varName,
 			Observable<String> input) {
 		final Pattern pattern = Pattern.compile("\\s*" + varName
@@ -91,28 +113,34 @@ public class ReactiveSumV1 implements Program {
 	}
 
 	public String name() {
-		return "Reactive Sum : Intro";
+		return "Reactive Sum, version 1";
 	}
 
 	public void run() {
-		Observable<String> input = CreateObservable.input();
+		ConnectableObservable<String> input = CreateObservable.from(System.in);
 
 		Observable<Double> a = varStream("a", input);
 		Observable<Double> b = varStream("b", input);
 
 		ReactiveSum sum = new ReactiveSum(a, b);
 		
-		input
-		.map(line -> line.trim())
-		.filter(line -> line.equals("return"))
-		.doOnNext(v -> System.out.println("Exiting 'Reactive Sum' example..."))
-		.subscribeOn(Schedulers.io())
-		.subscribe(v -> sum.unsubscribe());
+		input.connect();
+		
+		try {
+			sum.getLatch().await();
+		} catch (InterruptedException e) {}
 	}
 
 	@Override
 	public int chapter() {
 		return 1;
 	}
-
+	
+	/**
+	 * Here the input is executed on a separate thread, so we block the current one until it sends
+	 * a `completed` notification.
+	 */
+	public static void main(String[] args) throws InterruptedException {
+		new ReactiveSumV1().run();
+	}
 }

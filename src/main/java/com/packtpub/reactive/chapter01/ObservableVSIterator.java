@@ -1,15 +1,15 @@
-package com.packtpub.reactive.one;
+package com.packtpub.reactive.chapter01;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import com.packtpub.reactive.common.Program;
-
 import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
+
+import com.packtpub.reactive.common.Program;
 
 /**
  * Demonstrate the differences between Iterators and Observables.
@@ -31,7 +31,6 @@ public class ObservableVSIterator implements Program {
 			}
 
 			System.out.println("We've finnished!");
-			System.out.println(iterator.hasNext());
 		} catch (NoSuchElementException e) {
 			System.err.println(e);
 		}
@@ -67,12 +66,19 @@ public class ObservableVSIterator implements Program {
 
 	@Override
 	public void run() {
+		System.out.println("Running Iterator example:");
 		usingIteratorExample();
+		
+		System.out.println("Running Observable example:");
 		usingObservableExample();
 	}
 
 	@Override
 	public int chapter() {
 		return 1;
+	}
+	
+	public static void main(String[] args) {
+		new ObservableVSIterator().run();
 	}
 }
