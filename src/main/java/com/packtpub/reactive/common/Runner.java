@@ -93,6 +93,7 @@ public class Runner {
 	public Runner() {
 		actions.put("list", this::listPrograms);
 		actions.put("run", this::runProgram);
+		actions.put("help", this::help);
 	}
 
 	/**
@@ -105,6 +106,26 @@ public class Runner {
 		this.programs.addAll(Arrays.asList(programs));
 	}
 
+	public void help(String... params) {
+		this.output(
+				"---------------------------------------------------------------------------------------------------------------------",
+				"This is a command line program, which runs the examples of the 'Learning Reactive Programming With Java 8' book.",
+				"Available commands are : ",
+				"  list - Lists the available examples prefixed by their IDs.",
+				"      It lists all the examples when run as just 'list' or 'list all'",
+				"      It lists only the examples under given chapter(s) when run as 'list chapter <number1> <number2> ...'",
+				"      For example 'list chapter 2' will list the examples of chapter 2.",
+				"  run - Runs an example.",
+				"      It runs an example by given ID (you can look at the IDs by running 'list'), when executed as 'run <ID>'",
+				"      For example 'run 5' will run the example with ID of 5.",
+				"      It can execute an example by chapter, when run as 'run chapter <chapter_number> <example_number_in_chapter>'",
+				"      Example of this is 'run chapter 1 2' - this will run the second example of the first chapter.",
+				"  help - Prints this help.",
+				"  exit - Exits this program.",
+				"---------------------------------------------------------------------------------------------------------------------"
+				);
+	}
+	
 	/**
 	 * Represents an user action. It is triggered on the <i>list</i> command.
 	 * 
@@ -164,6 +185,10 @@ public class Runner {
 				);
 	}
 	
+	/**
+	 * Entry point of the Runner.
+	 * Uses the input stream to receive and run commands.
+	 */
 	public void run() {
 		Observable<String> input = CreateObservable.input();
 
@@ -176,7 +201,7 @@ public class Runner {
 				.cast(ActionRunner.class)
 				.subscribe(action -> action.run(),
 						e -> System.err.println(e.getMessage()),
-						() -> System.out.println("End!"));
+						() -> System.out.println("Bye, bye :)"));
 	}
 
 	private Observable<Program> programFromParams(String... params) {
@@ -285,7 +310,7 @@ public class Runner {
 		Runner runner = init();
 
 		runner.output("Example selection interface.",
-				"Available commands - 'list', 'describe <number>', 'run <number>'");
+				"Available commands - 'list', 'help', 'run <ID>', 'exit'");
 
 		runner.run();
 	}
