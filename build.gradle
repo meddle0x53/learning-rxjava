@@ -32,7 +32,7 @@ test {
     systemProperties 'property': 'value'
 }
 
-task(meddle, dependsOn: 'classes') << {
+task(rxrun, dependsOn: 'classes') << {
     def classpath = sourceSets.main.runtimeClasspath
 
     def command = [
