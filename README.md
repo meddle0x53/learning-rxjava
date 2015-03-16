@@ -18,5 +18,5 @@ It is a command line application, contained in one jar, written using RxJava tha
      gradle rxrun
    ```
    
-This will download and install all the dependencies needed by the project, will compile it and run it for you.
+ * This will download and install all the dependencies needed by the project, will compile it and run it for you.
  
