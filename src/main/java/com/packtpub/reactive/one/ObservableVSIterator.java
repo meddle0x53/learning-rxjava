@@ -11,32 +11,40 @@ import rx.Observable;
 import rx.functions.Action0;
 import rx.functions.Action1;
 
-public class IteratorExamples implements Program {
+/**
+ * Demonstrate the differences between Iterators and Observables.
+ * 
+ * @author meddle
+ */
+public class ObservableVSIterator implements Program {
 
-	public static void usingIteratorExample() {
+	private static void usingIteratorExample() {
 		List<String> list = Arrays
-				.asList("One", "Two", "Three", "Four", "Five"); // (1)
+				.asList("One", "Two", "Three", "Four", "Five");
 
-		Iterator<String> iterator = list.iterator(); // (2)
+		Iterator<String> iterator = list.iterator();
 
 		try {
-			while (iterator.hasNext()) { // 3
-				System.out.println(iterator.next()); // Prints elements (4)
+			// While there is a next element, PULL it from the source and print it.
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
 			}
 
-			System.out.println("We've finnished!"); // (5)
-			System.out.println(iterator.hasNext()); // Prints 'false' (5)
+			System.out.println("We've finnished!");
+			System.out.println(iterator.hasNext());
 		} catch (NoSuchElementException e) {
-			System.err.println(e); // (6)
+			System.err.println(e);
 		}
 
 	}
 
-	public static void usingObservableExample() {
+	private static void usingObservableExample() {
 		List<String> list = Arrays
 				.asList("One", "Two", "Three", "Four", "Five");
 
 		Observable<String> observable = Observable.from(list);
+		
+		// Subscribe to the Observable. It will PUSH it's values to the Subscriber, and it will be printed.
 		observable.subscribe(new Action1<String>() {
 			public void call(String element) {
 				System.out.println(element);
@@ -50,9 +58,6 @@ public class IteratorExamples implements Program {
 				System.out.println("We've finnished!"); // (2)
 			}
 		});
-	}
-
-	public static void main(String[] args) {
 	}
 
 	@Override

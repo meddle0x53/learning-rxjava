@@ -8,11 +8,17 @@ import rx.Observer;
 import rx.Subscription;
 import rx.functions.Func1;
 import rx.functions.Func2;
+import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
-public class ReactiveSumExample implements Program {
+/**
+ * A demonstration of how to implement a sum that updates automatically when any of its <> changes.
+ * 
+ * @author meddle
+ */
+public class ReactiveSumV1 implements Program {
 
 	public static final class ReactiveSum implements Observer<Double> {
 
@@ -30,8 +36,7 @@ public class ReactiveSumExample implements Program {
 				public Double call(Double a, Double b) {
 					return a + b;
 				}
-			}).subscribe(this);
-			
+			}).subscribeOn(Schedulers.io()).subscribe(this);
 		}
 		
 		public void unsubscribe() {
@@ -101,6 +106,7 @@ public class ReactiveSumExample implements Program {
 		.map(line -> line.trim())
 		.filter(line -> line.equals("return"))
 		.doOnNext(v -> System.out.println("Exiting 'Reactive Sum' example..."))
+		.subscribeOn(Schedulers.io())
 		.subscribe(v -> sum.unsubscribe());
 	}
 
@@ -108,4 +114,5 @@ public class ReactiveSumExample implements Program {
 	public int chapter() {
 		return 1;
 	}
+
 }

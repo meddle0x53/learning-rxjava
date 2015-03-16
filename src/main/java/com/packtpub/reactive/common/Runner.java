@@ -23,8 +23,8 @@ import com.packtpub.reactive.four.GroupingExamples;
 import com.packtpub.reactive.four.MappingExamples;
 import com.packtpub.reactive.four.OtherTransformationExample;
 import com.packtpub.reactive.four.ScanExamples;
-import com.packtpub.reactive.one.IteratorExamples;
-import com.packtpub.reactive.one.ReactiveSumExample;
+import com.packtpub.reactive.one.ObservableVSIterator;
+import com.packtpub.reactive.one.ReactiveSumV1;
 import com.packtpub.reactive.seven.BlockingExample;
 import com.packtpub.reactive.six.BufferingExamples;
 import com.packtpub.reactive.six.IntervalAndSchedulers;
@@ -274,8 +274,9 @@ public class Runner {
 	private static Runner init() {
 		Runner runner = new Runner();
 		runner.registerPrograms(
-				new ReactiveSumExample(),
-				new IteratorExamples(), new IntroToLambdasExample(),
+				new ObservableVSIterator(),
+				new ReactiveSumV1(),
+				new IntroToLambdasExample(),
 				new ReactiveSumWithLambdas(), new FunctionsExample(),
 				new MonadsExample(), new ObservablesAndMonads(),
 				new ObservableCreationFromExamples(),
