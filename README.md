@@ -15,12 +15,18 @@ It is a command line application, contained in one jar, written using RxJava tha
  * Navigate to the root of the project (`cd learning-rxjava`) and run :
  
    ```
-     gradle rxrun
+     gradle build
    ```
    
- * This will download and install all the dependencies needed by the project, will compile it and run it for you.
+ * This will download and install all the dependencies needed by the project and will compile it.
+ * You can open the project with Eclipse and run the examples. You'll need the gradle plugin for Eclipse.
+ * All the examples can be run through a single command line application:
  
-## Available commands
+  ```
+    gradle rxrun
+  ```
+ 
+## Available commands of the command line application
 
 ### list
 The list command lists the examples with their numbers. These numbers can be used to run an example.
@@ -46,6 +52,12 @@ This example is used in the book in the 'Comparing the Iterator pattern and the 
 It demonstrates the difference between RxJava's Observables and the Iterators, by iterating over a list of strings.
 The `Observable.from` method is introduced here for the first time, as well as subscribing.
 
-The example can be found here [ObservableVSIterator](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/one/ObservableVSIterator.java)
+The example can be found here [ObservableVSIterator](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ObservableVSIterator.java)
+
+### 2. Reactive Sum, version 1 (Chapter 1, page 10)
+This is example demonstrates a reactive sum, which is updated on change of any of its collectors. It is demonstrates
+many of the features of RxJava, like Observers, Schedulers Observable transformations, filtering and combining.
+
+The example can be found here [ReactiveSumV1](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ReactiveSumV1.java)
 
  
