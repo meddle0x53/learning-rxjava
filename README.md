@@ -90,3 +90,8 @@ The example can be found here [ObservablesAndMonads](https://github.com/meddle0x
 A set of examples of using the Observable.from method for creating Observables from collections, arrays and Iterables.
 
 The example can be found here [CreatingObservablesWithFrom](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFrom.java)
+
+### 09. Using Observable.from with Future (Chapter 3, pages 40-42)
+Demonstrates creating Observables using the Observable.from(Future) method.
+
+The example can be found here [CreatingObservablesWithFromFuture](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFromFuture.java)
