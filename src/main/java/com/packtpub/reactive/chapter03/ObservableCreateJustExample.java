@@ -1,4 +1,4 @@
-package com.packtpub.reactive.three;
+package com.packtpub.reactive.chapter03;
 
 import rx.Observable;
 

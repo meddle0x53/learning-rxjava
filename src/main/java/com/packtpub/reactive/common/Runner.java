@@ -17,6 +17,13 @@ import com.packtpub.reactive.chapter02.Java8LambdasSyntaxIntroduction;
 import com.packtpub.reactive.chapter02.Monads;
 import com.packtpub.reactive.chapter02.ObservablesAndMonads;
 import com.packtpub.reactive.chapter02.ReactiveSumV2;
+import com.packtpub.reactive.chapter03.ConnectableObservableExample;
+import com.packtpub.reactive.chapter03.ObservableCreateExample;
+import com.packtpub.reactive.chapter03.ObservableCreateJustExample;
+import com.packtpub.reactive.chapter03.ObservableCreateVariousExample;
+import com.packtpub.reactive.chapter03.ObservableCreationFromExamples;
+import com.packtpub.reactive.chapter03.ObservableCreationFromFutures;
+import com.packtpub.reactive.chapter03.SubjectsExample;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -36,13 +43,6 @@ import com.packtpub.reactive.six.IntervalAndSchedulers;
 import com.packtpub.reactive.six.ParallelRequestsExample;
 import com.packtpub.reactive.six.SchedulersExamples;
 import com.packtpub.reactive.six.SchedulersTypesExamples;
-import com.packtpub.reactive.three.ConnectableObservableExample;
-import com.packtpub.reactive.three.ObservableCreateExample;
-import com.packtpub.reactive.three.ObservableCreateJustExample;
-import com.packtpub.reactive.three.ObservableCreateVariousExample;
-import com.packtpub.reactive.three.ObservableCreationFromExamples;
-import com.packtpub.reactive.three.ObservableCreationFromFutures;
-import com.packtpub.reactive.three.SubjectsExample;
 
 /**
  * The main class of this project it is able to run all the examples.
