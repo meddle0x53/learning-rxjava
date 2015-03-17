@@ -75,4 +75,9 @@ The example can be found here [ReactiveSumV2](https://github.com/meddle0x53/lear
 Demonstrates pure and higher order functions. Applies higher order functions to other functions.
 
 The example can be found here [PureAndHigherOrderFunctions](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/PureAndHigherOrderFunctions.java)
+
+### 06. Introduction to monads (Chapter 2, pages 30-33)
+Shows implementation and uses of a monad. The Optional monad.
+
+The example can be found here [Monads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Monads.java)
  
