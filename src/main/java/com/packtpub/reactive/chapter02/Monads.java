@@ -4,11 +4,15 @@ import java.util.function.Function;
 
 import com.packtpub.reactive.common.Program;
 
-public class MonadsExample implements Program {
+/**
+ * Demonstrates what a monad is. Contains implementation of the Optional monad and uses it.
+ * @author meddle
+ */
+public class Monads implements Program {
 
 	@Override
 	public String name() {
-		return "Monads";
+		return "Introduction to monads";
 	}
 
 	@Override
@@ -16,6 +20,12 @@ public class MonadsExample implements Program {
 		return 2;
 	}
 
+	/**
+	 * Simple implementation of the Optional monad.
+	 * It has the unit/bind methods and represents a value that can be null but it is safe for calling methods upon.
+	 * 
+	 * @author meddle
+	 */
 	public static class Opt<T> {
 
 		public static Opt<?> NULL = new Opt<>();
@@ -52,6 +62,12 @@ public class MonadsExample implements Program {
 		}
 	}
 
+	/**
+	 * Simple Address.
+	 * It has street and two getters for it - with the Opt monad and without it.
+	 * 
+	 * @author meddle
+	 */
 	public static class Address {
 		private final String street;
 
@@ -68,6 +84,12 @@ public class MonadsExample implements Program {
 		}
 	}
 
+	/**
+	 * Simple user.
+	 * It has address, accessed by two getter methods - one using the Opt monad and a plain one.
+	 * 
+	 * @author meddle
+	 */
 	public static class User {
 		private final Address address;
 
@@ -90,11 +112,13 @@ public class MonadsExample implements Program {
 
 	@Override
 	public void run() {
+		// Simple user with address.
 		User user = new User(new Address("14 Penny Street"));
 		System.out.println(user.getAddress().getStreet());
 
 		user = new User();
 
+		// Getting the street of user without address, but without raising execeptions.
 		String street = user.getOptAddress().bind(a -> a.getOptStreet()).get();
 		System.out.println(street);
 
@@ -117,7 +141,10 @@ public class MonadsExample implements Program {
 		Opt<Integer> monad1 = Opt.unit(9);
 		Opt<Integer> monad2 = monad1.bind(Opt::unit);
 		System.out.println(monad1.get() == monad2.get());
-
+	}
+	
+	public static void main(String[] args) {
+		new Monads().run();
 	}
 
 }
