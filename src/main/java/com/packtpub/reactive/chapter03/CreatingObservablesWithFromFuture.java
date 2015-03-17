@@ -6,13 +6,19 @@ import java.nio.channels.AsynchronousFileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.CountDownLatch;
 
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
-public class ObservableCreationFromFutures implements Program {
+/**
+ * Demonstrates creating Observables from Future objects.
+ * 
+ * @author meddle
+ */
+public class CreatingObservablesWithFromFuture implements Program {
 
 	@Override
 	public String name() {
@@ -26,11 +32,14 @@ public class ObservableCreationFromFutures implements Program {
 
 	@Override
 	public void run() {
-		ByteBuffer buffer = ByteBuffer.allocate(512);
+		CountDownLatch latch = new CountDownLatch(1);
+
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
 		Path path = Paths.get("src", "main", "resources", "lorem.txt");
 
-		try (AsynchronousFileChannel asyncChannel = AsynchronousFileChannel
-				.open(path)) {
+		AsynchronousFileChannel asyncChannel = null;
+		try {
+			asyncChannel = AsynchronousFileChannel.open(path);
 
 			Observable
 					.from(asyncChannel.read(buffer, 0))
@@ -38,22 +47,36 @@ public class ObservableCreationFromFutures implements Program {
 					.subscribe(
 							(b) -> buffer.flip(),
 							System.err::println,
-							() -> System.out.println(StandardCharsets.UTF_8
-									.decode(buffer)));
+							() -> {
+								System.out.println(StandardCharsets.UTF_8.decode(buffer));
+								latch.countDown();
+							});
+
 
 			System.out.println("Before Lorem");
 			System.out.println("We can do other things!");
 
 		} catch (IOException e) {
+		} finally {
+			try {
+				if (asyncChannel != null) {
+					asyncChannel.close();
+				}
+			} catch (IOException e) {}
 		}
 
 		try {
 			System.out.println("Waiting for the thread to end...");
 			System.out.println("--------------------------------");
-			Thread.sleep(2000);
+			
+			latch.await();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		new CreatingObservablesWithFromFuture().run();
 	}
 
 }

@@ -22,7 +22,7 @@ import com.packtpub.reactive.chapter03.ObservableCreateExample;
 import com.packtpub.reactive.chapter03.ObservableCreateJustExample;
 import com.packtpub.reactive.chapter03.ObservableCreateVariousExample;
 import com.packtpub.reactive.chapter03.CreatingObservablesWithFrom;
-import com.packtpub.reactive.chapter03.ObservableCreationFromFutures;
+import com.packtpub.reactive.chapter03.CreatingObservablesWithFromFuture;
 import com.packtpub.reactive.chapter03.SubjectsExample;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
@@ -280,7 +280,7 @@ public class Runner {
 				new ReactiveSumV2(), new PureAndHigherOrderFunctions(),
 				new Monads(), new ObservablesAndMonads(),
 				new CreatingObservablesWithFrom(),
-				new ObservableCreationFromFutures(),
+				new CreatingObservablesWithFromFuture(),
 				new ObservableCreateJustExample(),
 				new ObservableCreateVariousExample(),
 				new ObservableCreateExample(),
