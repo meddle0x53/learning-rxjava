@@ -81,3 +81,8 @@ Shows implementation and uses of a monad. The Optional monad.
 
 The example can be found here [Monads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Monads.java)
  
+### 07. Observables and monads (Chapter 2, pages 34)
+Shows that Observables are not true monads. They are monad-like structures though and benefit from that.
+
+The example can be found here [ObservablesAndMonads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ObservablesAndMonads.java)
+ 
