@@ -86,3 +86,7 @@ Shows that Observables are not true monads. They are monad-like structures thoug
 
 The example can be found here [ObservablesAndMonads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ObservablesAndMonads.java)
  
+### 08. Creating Observables with Observable.from (Chapter 3, pages 39-40)
+A set of examples of using the Observable.from method for creating Observables from collections, arrays and Iterables.
+
+The example can be found here [CreatingObservablesWithFrom](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFrom.java)
