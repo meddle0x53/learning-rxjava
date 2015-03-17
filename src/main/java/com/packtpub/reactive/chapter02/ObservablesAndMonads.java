@@ -7,6 +7,12 @@ import rx.functions.Func1;
 
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Demonstration of Observables being monad-like, which gives us many benefits.
+ * The Observables are not true monads, because the don't comply to the left identity law - demonstrated here.
+ * 
+ * @author meddle
+ */
 public class ObservablesAndMonads implements Program {
 
 	@Override
@@ -28,6 +34,7 @@ public class ObservablesAndMonads implements Program {
 		AtomicInteger left = new AtomicInteger();
 		AtomicInteger right = new AtomicInteger();
 
+		// Left identity:
 		try {
 			Observable
 					.just(0)
@@ -42,6 +49,10 @@ public class ObservablesAndMonads implements Program {
 		}
 
 		System.out.println(left.equals(right));
+	}
+	
+	public static void main(String[] args) {
+		new ObservablesAndMonads().run();
 	}
 
 }
