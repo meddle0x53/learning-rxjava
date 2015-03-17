@@ -4,7 +4,12 @@ import rx.Observable;
 
 import com.packtpub.reactive.common.Program;
 
-public class ObservableCreateJustExample implements Program {
+/**
+ * Demonstrates using Observable.just for creating Observables.
+ * 
+ * @author meddle
+ */
+public class CreatingObservablesUsingJust implements Program {
 
 	@Override
 	public String name() {
@@ -42,6 +47,10 @@ public class ObservableCreateJustExample implements Program {
 		Observable.just(new User("Dali", "Bali"))
 				.map(u -> u.getForename() + " " + u.getLastname())
 				.subscribe(System.out::println);
+	}
+	
+	public static void main(String[] args) {
+		new CreatingObservablesUsingJust().run();
 	}
 
 }

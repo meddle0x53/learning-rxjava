@@ -19,8 +19,8 @@ import com.packtpub.reactive.chapter02.ObservablesAndMonads;
 import com.packtpub.reactive.chapter02.ReactiveSumV2;
 import com.packtpub.reactive.chapter03.ConnectableObservableExample;
 import com.packtpub.reactive.chapter03.ObservableCreateExample;
-import com.packtpub.reactive.chapter03.ObservableCreateJustExample;
-import com.packtpub.reactive.chapter03.ObservableCreateVariousExample;
+import com.packtpub.reactive.chapter03.CreatingObservablesUsingJust;
+import com.packtpub.reactive.chapter03.CreatingObservablesUsingVariousFactoryMethods;
 import com.packtpub.reactive.chapter03.CreatingObservablesWithFrom;
 import com.packtpub.reactive.chapter03.CreatingObservablesWithFromFuture;
 import com.packtpub.reactive.chapter03.SubjectsExample;
@@ -281,8 +281,8 @@ public class Runner {
 				new Monads(), new ObservablesAndMonads(),
 				new CreatingObservablesWithFrom(),
 				new CreatingObservablesWithFromFuture(),
-				new ObservableCreateJustExample(),
-				new ObservableCreateVariousExample(),
+				new CreatingObservablesUsingJust(),
+				new CreatingObservablesUsingVariousFactoryMethods(),
 				new ObservableCreateExample(),
 				new ConnectableObservableExample(), new SubjectsExample(),
 				new MappingExamples(), new FlatMapAndFiles(),
