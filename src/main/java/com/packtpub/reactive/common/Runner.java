@@ -12,7 +12,7 @@ import rx.observables.GroupedObservable;
 
 import com.packtpub.reactive.chapter01.ObservableVSIterator;
 import com.packtpub.reactive.chapter01.ReactiveSumV1;
-import com.packtpub.reactive.chapter02.FunctionsExample;
+import com.packtpub.reactive.chapter02.PureAndHigherOrderFunctions;
 import com.packtpub.reactive.chapter02.Java8LambdasSyntaxIntroduction;
 import com.packtpub.reactive.chapter02.MonadsExample;
 import com.packtpub.reactive.chapter02.ObservablesAndMonads;
@@ -277,7 +277,7 @@ public class Runner {
 				new ObservableVSIterator(),
 				new ReactiveSumV1(),
 				new Java8LambdasSyntaxIntroduction(),
-				new ReactiveSumV2(), new FunctionsExample(),
+				new ReactiveSumV2(), new PureAndHigherOrderFunctions(),
 				new MonadsExample(), new ObservablesAndMonads(),
 				new ObservableCreationFromExamples(),
 				new ObservableCreationFromFutures(),
