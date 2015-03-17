@@ -12,6 +12,11 @@ import rx.observables.GroupedObservable;
 
 import com.packtpub.reactive.chapter01.ObservableVSIterator;
 import com.packtpub.reactive.chapter01.ReactiveSumV1;
+import com.packtpub.reactive.chapter02.FunctionsExample;
+import com.packtpub.reactive.chapter02.IntroToLambdasExample;
+import com.packtpub.reactive.chapter02.MonadsExample;
+import com.packtpub.reactive.chapter02.ObservablesAndMonads;
+import com.packtpub.reactive.chapter02.ReactiveSumWithLambdas;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -38,11 +43,6 @@ import com.packtpub.reactive.three.ObservableCreateVariousExample;
 import com.packtpub.reactive.three.ObservableCreationFromExamples;
 import com.packtpub.reactive.three.ObservableCreationFromFutures;
 import com.packtpub.reactive.three.SubjectsExample;
-import com.packtpub.reactive.two.FunctionsExample;
-import com.packtpub.reactive.two.IntroToLambdasExample;
-import com.packtpub.reactive.two.MonadsExample;
-import com.packtpub.reactive.two.ObservablesAndMonads;
-import com.packtpub.reactive.two.ReactiveSumWithLambdas;
 
 /**
  * The main class of this project it is able to run all the examples.

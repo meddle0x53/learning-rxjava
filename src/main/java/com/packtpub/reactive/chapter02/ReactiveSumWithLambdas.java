@@ -1,4 +1,4 @@
-package com.packtpub.reactive.two;
+package com.packtpub.reactive.chapter02;
 
 import java.util.regex.Pattern;
 
