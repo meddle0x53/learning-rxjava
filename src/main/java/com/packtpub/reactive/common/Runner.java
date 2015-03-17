@@ -21,7 +21,7 @@ import com.packtpub.reactive.chapter03.ConnectableObservableExample;
 import com.packtpub.reactive.chapter03.ObservableCreateExample;
 import com.packtpub.reactive.chapter03.ObservableCreateJustExample;
 import com.packtpub.reactive.chapter03.ObservableCreateVariousExample;
-import com.packtpub.reactive.chapter03.ObservableCreationFromExamples;
+import com.packtpub.reactive.chapter03.CreatingObservablesWithFrom;
 import com.packtpub.reactive.chapter03.ObservableCreationFromFutures;
 import com.packtpub.reactive.chapter03.SubjectsExample;
 import com.packtpub.reactive.eight.ComposeExample;
@@ -279,7 +279,7 @@ public class Runner {
 				new Java8LambdasSyntaxIntroduction(),
 				new ReactiveSumV2(), new PureAndHigherOrderFunctions(),
 				new Monads(), new ObservablesAndMonads(),
-				new ObservableCreationFromExamples(),
+				new CreatingObservablesWithFrom(),
 				new ObservableCreationFromFutures(),
 				new ObservableCreateJustExample(),
 				new ObservableCreateVariousExample(),

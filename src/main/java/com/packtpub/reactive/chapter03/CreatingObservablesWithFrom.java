@@ -13,7 +13,12 @@ import rx.functions.Action1;
 
 import com.packtpub.reactive.common.Program;
 
-public class ObservableCreationFromExamples implements Program {
+/**
+ * A set of examples of using Observable.from.
+ * 
+ * @author meddle
+ */
+public class CreatingObservablesWithFrom implements Program {
 
 	public static Action1<?> N = (v) -> {
 	};
@@ -22,7 +27,7 @@ public class ObservableCreationFromExamples implements Program {
 
 	@Override
 	public String name() {
-		return "Creating Observables With Observable.from";
+		return "Creating Observables with Observable.from";
 	}
 
 	@Override
@@ -58,6 +63,10 @@ public class ObservableCreationFromExamples implements Program {
 		Observable<Integer> arrayObservable = Observable.from(new Integer[] {
 				3, 5, 8 });
 		arrayObservable.subscribe(System.out::println);
+	}
+	
+	public static void main(String[] args) {
+		new CreatingObservablesWithFrom().run();
 	}
 
 }
