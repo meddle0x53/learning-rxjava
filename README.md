@@ -65,4 +65,9 @@ Demonstrates creating and using lambdas, passing them to methods, that receive F
 to existing methods.
 
 The example can be found here [Java8LambdasSyntaxIntroduction](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Java8LambdasSyntaxIntroduction.java)
+
+### 4. Reactive Sum, version 2 (with lambdas) (Chapter 2, page 22-24)
+Another implementation of the 'Reactive Sum', similar to the on of the first chapter, but it uses the new Java 8 syntax with lambdas.
+
+The example can be found here [ReactiveSumV2](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ReactiveSumV2.java)
  
