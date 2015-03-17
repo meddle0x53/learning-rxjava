@@ -95,3 +95,14 @@ The example can be found here [CreatingObservablesWithFrom](https://github.com/m
 Demonstrates creating Observables using the Observable.from(Future) method.
 
 The example can be found here [CreatingObservablesWithFromFuture](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFromFuture.java)
+
+### 10. Using the Observable.just method to create Observables (Chapter 3, pages 42-43)
+Demonstrates creating Observables using the Observable.just method.
+
+The example can be found here [CreatingObservablesUsingJust](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesUsingJust.java)
+
+### 11. A few factory methods for creating Observables (Chapter 3, pages 43-46)
+Demonstrates using Observable.interval, Observable.timer, Observable.error,
+Observable.never, Observable.empty and Observable.range for Obsevable creation.
+
+The example can be found here [CreatingObservablesUsingVariousFactoryMethods](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesUsingVariousFactoryMethods.java)
