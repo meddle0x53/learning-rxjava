@@ -1,13 +1,23 @@
 package com.packtpub.reactive.chapter02;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Pattern;
 
 import rx.Observable;
+import rx.observables.ConnectableObservable;
+import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
-public class ReactiveSumWithLambdas implements Program {
+/**
+ * Version 2 of the Reactive Sum, implemented using Java 8 lambdas.
+ * 
+ * @author meddle
+ */
+public class ReactiveSumV2 implements Program {
+	
+	private CountDownLatch latch = new CountDownLatch(1);
 
 	public static Observable<Double> varStream(final String varName,
 			Observable<String> input) {
@@ -22,35 +32,48 @@ public class ReactiveSumWithLambdas implements Program {
 				.map(str -> Double.parseDouble(str));
 	}
 
-	public static void reactiveSum(Observable<Double> a, Observable<Double> b) {
-		Observable.combineLatest(a, b, (x, y) -> x + y).subscribe(
+	public void reactiveSum(Observable<Double> a, Observable<Double> b) {
+
+		Observable
+		.combineLatest(a, b, (x, y) -> x + y)
+		.subscribeOn(Schedulers.io())
+		.subscribe(
 				sum -> System.out.println("update : a + b = " + sum),
 				error -> {
 					System.out.println("Got an error!");
 					error.printStackTrace();
-				}, () -> System.out.println("Exiting..."));
+				}, () -> {
+					System.out.println("Exiting...");
+					latch.countDown();
+				});
+		
 	}
 
 	public String name() {
-		return "Reactive Sum : Lambdas";
+		return "Reactive Sum, version 2 (with lambdas)";
 	}
 
 	public void run() {
-		Observable<String> input = CreateObservable.input();
+		ConnectableObservable<String> input = CreateObservable.from(System.in);
 
 		Observable<Double> a = varStream("a", input);
 		Observable<Double> b = varStream("b", input);
 
 		reactiveSum(a, b);
+		
+		input.connect();
 
-	}
-
-	public static void main(String[] args) {
-		new ReactiveSumWithLambdas().run();
+		try {
+			latch.await();
+		} catch (InterruptedException e) {}
 	}
 
 	@Override
 	public int chapter() {
 		return 2;
+	}
+
+	public static void main(String[] args) {
+		new ReactiveSumV2().run();
 	}
 }
