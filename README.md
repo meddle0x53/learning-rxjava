@@ -47,27 +47,32 @@ Runs an example using its number (the number can be retrieved by running `list`)
 ## Examples
 Here are the descriptions of all the examples in the book.
 
-### 1. Iterator VS Observable (Chapter 1, page 5)
+### 01. Iterator VS Observable (Chapter 1, pages 5)
 This example is used in the book in the 'Comparing the Iterator pattern and the RxJava Observable' of the first chapter.
 It demonstrates the difference between RxJava's Observables and the Iterators, by iterating over a list of strings.
 The `Observable.from` method is introduced here for the first time, as well as subscribing.
 
 The example can be found here [ObservableVSIterator](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ObservableVSIterator.java)
 
-### 2. Reactive Sum, version 1 (Chapter 1, page 10)
+### 02. Reactive Sum, version 1 (Chapter 1, pages 10)
 This is example demonstrates a reactive sum, which is updated on change of any of its collectors. It is demonstrates
 many of the features of RxJava, like Observers, Schedulers Observable transformations, filtering and combining.
 
 The example can be found here [ReactiveSumV1](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ReactiveSumV1.java)
 
-### 3. Introduction to the new syntax and semantics (Chapter 2, page 17-22)
+### 03. Introduction to the new syntax and semantics (Chapter 2, pages 17-22)
 Demonstrates creating and using lambdas, passing them to methods, that receive Functional Interfaces as parameters and references
 to existing methods.
 
 The example can be found here [Java8LambdasSyntaxIntroduction](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Java8LambdasSyntaxIntroduction.java)
 
-### 4. Reactive Sum, version 2 (with lambdas) (Chapter 2, page 22-24)
+### 04. Reactive Sum, version 2 (with lambdas) (Chapter 2, pages 22-24)
 Another implementation of the 'Reactive Sum', similar to the on of the first chapter, but it uses the new Java 8 syntax with lambdas.
 
 The example can be found here [ReactiveSumV2](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ReactiveSumV2.java)
+ 
+### 05. Pure and higher functions (Chapter 2, pages 26-29)
+Demonstrates pure and higher order functions. Applies higher order functions to other functions.
+
+The example can be found here [PureAndHigherOrderFunctions](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/PureAndHigherOrderFunctions.java)
  
