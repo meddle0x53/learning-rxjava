@@ -60,4 +60,9 @@ many of the features of RxJava, like Observers, Schedulers Observable transforma
 
 The example can be found here [ReactiveSumV1](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ReactiveSumV1.java)
 
+### 3. Introduction to the new syntax and semantics (Chapter 2, page 17-22)
+Demonstrates creating and using lambdas, passing them to methods, that receive Functional Interfaces as parameters and references
+to existing methods.
+
+The example can be found here [Java8LambdasSyntaxIntroduction](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Java8LambdasSyntaxIntroduction.java)
  
