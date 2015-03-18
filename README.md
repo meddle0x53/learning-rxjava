@@ -109,7 +109,24 @@ Demonstration of using map, flatMap, flatMapIterable and switchMap.
 
 The example can be found here [MappingExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/MappingExamples.java)
 
-#### 17. Demonstration of using the Observable#groupBy operator (Chapter 4, pages 67-69)
+#### 17. Working with files using flatMap (Chapter 4, pages 60-62)
+Demonstration of using flatMap with an Observable created by directory stream,
+reading all the files from it, using Observables.
+
+The example can be found here [FlatMapAndFiles](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/FlatMapAndFiles.java)
+
+#### 18. Demonstration of using the Observable#groupBy operator (Chapter 4, pages 67-69)
 Demonstrates how the groupBy operator can be used.
 
 The example can be found here [UsingGroupBy](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/UsingGroupBy.java)
+
+#### 19. Demonstration of various transforming operators (Chapter 4, pages 69-71)
+Demonstration of working with the cast, materialize, timestamp and timeInterval operators.
+
+The example can be found here [VariousTransformationsDemonstration](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/VariousTransformationsDemonstration.java)
+
+#### 20. Various examples of using filtering operators (Chapter 4, pages 71-75)
+Demonstrates the filter, takeLast, last, takeLastBuffer, lastOrDefault,
+skipLast, skip, first, elementAt, distinct, distinctUntilChanged and ofType operators.
+
+The example can be found here [FilteringExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/FilteringExamples.java)
