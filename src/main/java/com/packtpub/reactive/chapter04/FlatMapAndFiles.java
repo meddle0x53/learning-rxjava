@@ -5,11 +5,16 @@ import static com.packtpub.reactive.common.Helpers.subscribePrint;
 import java.nio.file.Paths;
 
 import rx.Observable;
-import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Demonstration of using flatMap with an Observable created by directory stream,
+ * reading all the files from it, using Observables.
+ * 
+ * @author meddle
+ */
 public class FlatMapAndFiles implements Program {
 
 	@Override
@@ -26,16 +31,14 @@ public class FlatMapAndFiles implements Program {
 	public void run() {
 		Observable<String> fsObs = CreateObservable.listFolder(
 				Paths.get("src", "main", "resources"),
-				"{lorem.txt,letters.txt}").flatMap(
-				path -> CreateObservable.from(path, Schedulers.io())
-						.onBackpressureBuffer());
+				"{lorem.txt,letters.txt}")
+				.flatMap(path -> CreateObservable.from(path));
 
 		subscribePrint(fsObs, "FS");
-
-		try {
-			Thread.sleep(5000L);
-		} catch (InterruptedException e) {
-		}
+	}
+	
+	public static void main(String[] args) {
+		new FlatMapAndFiles().run();
 	}
 
 }

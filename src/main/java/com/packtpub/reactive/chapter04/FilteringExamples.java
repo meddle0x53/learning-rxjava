@@ -8,11 +8,17 @@ import com.packtpub.reactive.common.Program;
 
 import static com.packtpub.reactive.common.Helpers.subscribePrint;
 
+/**
+ * Demonstrates the filter, takeLast, last, takeLastBuffer, lastOrDefault,
+ * skipLast, skip, first, elementAt, distinct, distinctUntilChanged and ofType operators.
+ * 
+ * @author meddle
+ */
 public class FilteringExamples implements Program {
 
 	@Override
 	public String name() {
-		return "Various examples of using filtering operators.";
+		return "Various examples of using filtering operators";
 	}
 
 	@Override

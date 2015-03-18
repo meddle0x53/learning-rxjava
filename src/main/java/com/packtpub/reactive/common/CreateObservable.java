@@ -97,14 +97,19 @@ public class CreateObservable {
 
 	public static Observable<Path> listFolder(Path dir, String glob) {
 		return Observable.<Path> create(subscriber -> {
-			try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir,
-					glob)) {
+			DirectoryStream<Path> stream = null;
+			try {
+				stream = Files.newDirectoryStream(dir, glob);
 				Observable.<Path> from(stream).subscribe(subscriber::onNext,
 						subscriber::onError, subscriber::onCompleted);
 			} catch (DirectoryIteratorException ex) {
 				subscriber.onError(ex);
 			} catch (IOException ioe) {
 				subscriber.onError(ioe);
+			} finally {
+				try {
+					stream.close();
+				} catch (Exception e) {}
 			}
 		});
 	}
