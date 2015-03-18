@@ -117,3 +117,13 @@ The example can be found here [ObservableCreateExample](https://github.com/meddl
 Demonstration of ConnectableObservables and the methods realted to them - publish, refCount, share.
 
 The example can be found here [UsingConnectableObservables](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/UsingConnectableObservables.java)
+
+### 14. Subjects demonstration (Chapter 3, pages 53-54)
+Demonstrates using a Subject to subscribe to an Observables, propagating its notifications to multiple Subscribers.
+
+The example can be found here [SubjectsDemonstration](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/SubjectsDemonstration.java)
+
+### 15. Reactive Sum, version 3 (with Subjects) (Chapter 3, pages 55-57)
+The 'Reactive Sum' is implemented through reactive properties, which are in fact BehaviorSubjects.
+
+The example can be found here [ReactiveSumV3](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/ReactiveSumV3.java)
