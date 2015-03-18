@@ -10,11 +10,16 @@ import rx.observables.ConnectableObservable;
 
 import com.packtpub.reactive.common.Program;
 
-public class ConnectableObservableExample implements Program {
+/**
+ * Demonstrates how to create and use ConnectableObservables.
+ * 
+ * @author meddle
+ */
+public class UsingConnectableObservables implements Program {
 
 	@Override
 	public String name() {
-		return "Connectable Observables demonstration.";
+		return "A ConnectableObservable demonstration";
 	}
 
 	@Override
@@ -73,5 +78,9 @@ public class ConnectableObservableExample implements Program {
 		} catch (InterruptedException e) {
 		}
 		sub4.unsubscribe();
+	}
+	
+	public static void main(String[] args) {
+		new UsingConnectableObservables().run();
 	}
 }

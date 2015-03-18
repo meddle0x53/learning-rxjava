@@ -17,7 +17,7 @@ import com.packtpub.reactive.chapter02.Java8LambdasSyntaxIntroduction;
 import com.packtpub.reactive.chapter02.Monads;
 import com.packtpub.reactive.chapter02.ObservablesAndMonads;
 import com.packtpub.reactive.chapter02.ReactiveSumV2;
-import com.packtpub.reactive.chapter03.ConnectableObservableExample;
+import com.packtpub.reactive.chapter03.UsingConnectableObservables;
 import com.packtpub.reactive.chapter03.ObservableCreateExample;
 import com.packtpub.reactive.chapter03.CreatingObservablesUsingJust;
 import com.packtpub.reactive.chapter03.CreatingObservablesUsingVariousFactoryMethods;
@@ -284,7 +284,7 @@ public class Runner {
 				new CreatingObservablesUsingJust(),
 				new CreatingObservablesUsingVariousFactoryMethods(),
 				new ObservableCreateExample(),
-				new ConnectableObservableExample(), new SubjectsExample(),
+				new UsingConnectableObservables(), new SubjectsExample(),
 				new MappingExamples(), new FlatMapAndFiles(),
 				new GroupingExamples(), new OtherTransformationExample(),
 				new FilteringExamples(), new ScanExamples(),
