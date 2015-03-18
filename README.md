@@ -112,3 +112,8 @@ Demonstrates using Observable.create for creating custom Observables.
 Contains unsubscribing and implementing unsubscribing logic in Observable.create.
 
 The example can be found here [ObservableCreateExample](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/ObservableCreateExample.java)
+
+### 13. A ConnectableObservable demonstration (Chapter 3, pages 51-53)
+Demonstration of ConnectableObservables and the methods realted to them - publish, refCount, share.
+
+The example can be found here [UsingConnectableObservables](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/UsingConnectableObservables.java)
