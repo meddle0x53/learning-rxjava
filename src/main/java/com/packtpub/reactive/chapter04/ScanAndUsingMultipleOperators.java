@@ -10,11 +10,17 @@ import rx.Observable;
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
-public class ScanExamples implements Program {
+/**
+ * Demonstrates how to use the `scan` operator.
+ * Contains an example of working with data using the majority of the operators learned through the chapter.
+ * 
+ * @author meddle
+ */
+public class ScanAndUsingMultipleOperators implements Program {
 
 	@Override
 	public String name() {
-		return "Examples of using scan.";
+		return "Demonstration of using Observable#scan and more";
 	}
 
 	@Override
@@ -58,4 +64,7 @@ public class ScanExamples implements Program {
 		subscribePrint(multy, "Multiple operators");
 	}
 
+	public static void main(String[] args) {
+		new ScanAndUsingMultipleOperators().run();
+	}
 }
