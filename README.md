@@ -130,3 +130,8 @@ Demonstrates the filter, takeLast, last, takeLastBuffer, lastOrDefault,
 skipLast, skip, first, elementAt, distinct, distinctUntilChanged and ofType operators.
 
 The example can be found here [FilteringExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/FilteringExamples.java)
+
+#### 21. Demonstration of using Observable#scan and more (Chapter 4, pages 76-78)
+Demonstrates the scan operator and contains an example of working with data using the majority of the operators learned through the chapter.
+
+The example can be found here [ScanAndUsingMultipleOperators](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/ScanAndUsingMultipleOperators.java)
