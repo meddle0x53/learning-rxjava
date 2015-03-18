@@ -17,11 +17,17 @@ import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Show case of the Observable.create method.
+ * Contains a simple implementation of the Observable.from(Iterable) method, using Observable.create.
+ * 
+ * @author meddle
+ */
 public class ObservableCreateExample implements Program {
 
 	@Override
 	public String name() {
-		return "Showcases the Observable.create method.";
+		return "Demonstration of the Observable.create method";
 	}
 
 	@Override
@@ -75,6 +81,10 @@ public class ObservableCreateExample implements Program {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		new ObservableCreateExample().run();
 	}
 
 }
