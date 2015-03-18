@@ -23,7 +23,7 @@ import com.packtpub.reactive.chapter03.CreatingObservablesUsingJust;
 import com.packtpub.reactive.chapter03.CreatingObservablesUsingVariousFactoryMethods;
 import com.packtpub.reactive.chapter03.CreatingObservablesWithFrom;
 import com.packtpub.reactive.chapter03.CreatingObservablesWithFromFuture;
-import com.packtpub.reactive.chapter03.SubjectsExample;
+import com.packtpub.reactive.chapter03.SubjectsDemonstration;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -284,7 +284,7 @@ public class Runner {
 				new CreatingObservablesUsingJust(),
 				new CreatingObservablesUsingVariousFactoryMethods(),
 				new ObservableCreateExample(),
-				new UsingConnectableObservables(), new SubjectsExample(),
+				new UsingConnectableObservables(), new SubjectsDemonstration(),
 				new MappingExamples(), new FlatMapAndFiles(),
 				new GroupingExamples(), new OtherTransformationExample(),
 				new FilteringExamples(), new ScanExamples(),

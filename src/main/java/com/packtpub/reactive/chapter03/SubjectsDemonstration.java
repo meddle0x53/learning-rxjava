@@ -6,17 +6,22 @@ import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.subjects.BehaviorSubject;
 import rx.subjects.PublishSubject;
 import rx.subjects.Subject;
 
 import com.packtpub.reactive.common.Program;
 
-public class SubjectsExample implements Program {
+/**
+ * Demonstration of using Subjects and what we could do with them.
+ * Uses a {@link PublishSubject} to subscribe to an {@link Observable} and propagate its notifications.
+ * 
+ * @author meddle
+ */
+public class SubjectsDemonstration implements Program {
 
 	@Override
 	public String name() {
-		return "Subjects demonstration.";
+		return "Subjects demonstration";
 	}
 
 	@Override
@@ -24,48 +29,7 @@ public class SubjectsExample implements Program {
 		return 3;
 	}
 
-	public static class ReactiveSum {
-		private BehaviorSubject<Double> a = BehaviorSubject.create(0.0);
-		private BehaviorSubject<Double> b = BehaviorSubject.create(0.0);
-		private BehaviorSubject<Double> c = BehaviorSubject.create(0.0);
 
-		public ReactiveSum() {
-			Observable.combineLatest(a, b, (x, y) -> x + y).subscribe(c);
-		}
-
-		public double getA() {
-			return a.getValue();
-		}
-
-		public void setA(double a) {
-			this.a.onNext(a);
-		}
-
-		public Observable<Double> obsA() {
-			return a.asObservable();
-		}
-
-		public double getB() {
-			return b.getValue();
-		}
-
-		public void setB(double b) {
-			this.b.onNext(b);
-		}
-
-		public Observable<Double> obsB() {
-			return b.asObservable();
-		}
-
-		public double getC() {
-			return c.getValue();
-		}
-
-		public Observable<Double> obsC() {
-			return c.asObservable();
-		}
-
-	}
 
 	@Override
 	public void run() {
@@ -109,11 +73,9 @@ public class SubjectsExample implements Program {
 
 		System.out.println("-----------------------------");
 
-		ReactiveSum sum = new ReactiveSum();
-
-		subscribePrint(sum.obsC(), "Sum");
-		sum.setA(5);
-		sum.setB(4);
 	}
 
+	public static void main(String[] args) {
+		new SubjectsDemonstration().run();
+	}
 }
