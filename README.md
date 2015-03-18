@@ -108,3 +108,8 @@ The example can be found here [ReactiveSumV3](https://github.com/meddle0x53/lear
 Demonstration of using map, flatMap, flatMapIterable and switchMap.
 
 The example can be found here [MappingExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/MappingExamples.java)
+
+#### 17. Demonstration of using the Observable#groupBy operator (Chapter 4, pages 67-69)
+Demonstrates how the groupBy operator can be used.
+
+The example can be found here [UsingGroupBy](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/UsingGroupBy.java)
