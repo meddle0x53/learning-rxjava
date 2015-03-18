@@ -12,11 +12,16 @@ import rx.functions.Func1;
 
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Demonstration of using map, flatMap, flatMapIterable and switchMap.
+ * 
+ * @author meddle
+ */
 public class MappingExamples implements Program {
 
 	@Override
 	public String name() {
-		return "Examples using transformations";
+		return "Examples of using Observable transformations";
 	}
 
 	@Override
@@ -101,4 +106,7 @@ public class MappingExamples implements Program {
 		System.out.println("-----------------");
 	}
 
+	public static void main(String[] args) {
+		new MappingExamples().run();
+	}
 }
