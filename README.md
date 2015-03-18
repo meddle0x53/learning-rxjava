@@ -106,3 +106,9 @@ Demonstrates using Observable.interval, Observable.timer, Observable.error,
 Observable.never, Observable.empty and Observable.range for Obsevable creation.
 
 The example can be found here [CreatingObservablesUsingVariousFactoryMethods](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesUsingVariousFactoryMethods.java)
+
+### 12. Demonstration of the Observable.create method (Chapter 3, pages 46-50)
+Demonstrates using Observable.create for creating custom Observables.
+Contains unsubscribing and implementing unsubscribing logic in Observable.create.
+
+The example can be found here [ObservableCreateExample](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/ObservableCreateExample.java)
