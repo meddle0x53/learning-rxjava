@@ -1,4 +1,4 @@
-package com.packtpub.reactive.five;
+package com.packtpub.reactive.chapter05;
 
 import static com.packtpub.reactive.common.Helpers.subscribePrint;
 
