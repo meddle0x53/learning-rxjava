@@ -103,3 +103,8 @@ The example can be found here [SubjectsDemonstration](https://github.com/meddle0
 The 'Reactive Sum' is implemented through reactive properties, which are in fact BehaviorSubjects.
 
 The example can be found here [ReactiveSumV3](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/ReactiveSumV3.java)
+
+#### 16. Examples of using Observable transformations (Chapter 4, pages 59-66)
+Demonstration of using map, flatMap, flatMapIterable and switchMap.
+
+The example can be found here [MappingExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/MappingExamples.java)
