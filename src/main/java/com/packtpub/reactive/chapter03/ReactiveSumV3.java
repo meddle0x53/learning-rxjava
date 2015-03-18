@@ -8,6 +8,7 @@ import com.packtpub.reactive.common.Program;
 
 /**
  * Another version of the 'Reactive Sum', this time it is implemented, using {@link BehaviorSubject}s.
+ * 
  * @author meddle
  */
 public class ReactiveSumV3 implements Program {
