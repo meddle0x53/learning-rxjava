@@ -26,7 +26,7 @@ import com.packtpub.reactive.chapter03.CreatingObservablesWithFromFuture;
 import com.packtpub.reactive.chapter03.SubjectsDemonstration;
 import com.packtpub.reactive.chapter04.FilteringExamples;
 import com.packtpub.reactive.chapter04.FlatMapAndFiles;
-import com.packtpub.reactive.chapter04.GroupingExamples;
+import com.packtpub.reactive.chapter04.UsingGroupBy;
 import com.packtpub.reactive.chapter04.MappingExamples;
 import com.packtpub.reactive.chapter04.OtherTransformationExample;
 import com.packtpub.reactive.chapter04.ScanExamples;
@@ -286,7 +286,7 @@ public class Runner {
 				new ObservableCreateExample(),
 				new UsingConnectableObservables(), new SubjectsDemonstration(),
 				new MappingExamples(), new FlatMapAndFiles(),
-				new GroupingExamples(), new OtherTransformationExample(),
+				new UsingGroupBy(), new OtherTransformationExample(),
 				new FilteringExamples(), new ScanExamples(),
 				new CombiningObservablesExample(),
 				new ConditionalsExample(),
