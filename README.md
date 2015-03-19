@@ -140,3 +140,9 @@ The example can be found here [ScanAndUsingMultipleOperators](https://github.com
 Demonstrates combining Observables using Observable.zip, Observable.merge and Observable.concat.
 
 The example can be found here [CombiningObservables](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/CombiningObservables.java)
+
+#### 23. Some examples of using conditionals (Chapter 5, pages 82-88)
+Demonstration of using the Observable.amb, Observable.takeWhile, Observable.takeUntil,
+Observable.skipUntil and Observable.defaultIfEmpty.
+
+The example can be found here [Conditionals](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/Conditionals.java)
