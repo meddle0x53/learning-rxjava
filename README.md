@@ -152,3 +152,8 @@ A demonstrates working with Observable.onErrorReturn, Observable.onErrorResumeNe
 as well as retrying with Observable.retry and Observable.retryWhen.
 
 The example can be found here [HandlingErrors](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/HandlingErrors.java)
+
+#### 25. Example of doing HTTP requests and handling responses with Observables (Chapter 5, pages 95-99)
+Using multiple Observable operators in order to handle and augment an HTTP response from Github.
+
+The example can be found here [HttpRequestsExample](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/HttpRequestsExample.java)
