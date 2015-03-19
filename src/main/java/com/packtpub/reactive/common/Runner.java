@@ -34,15 +34,15 @@ import com.packtpub.reactive.chapter05.CombiningObservables;
 import com.packtpub.reactive.chapter05.Conditionals;
 import com.packtpub.reactive.chapter05.HandlingErrors;
 import com.packtpub.reactive.chapter05.HttpRequestsExample;
+import com.packtpub.reactive.chapter06.BufferingExamples;
+import com.packtpub.reactive.chapter06.IntervalAndSchedulers;
+import com.packtpub.reactive.chapter06.ParallelRequestsExample;
+import com.packtpub.reactive.chapter06.SchedulersExamples;
+import com.packtpub.reactive.chapter06.SchedulersTypesExamples;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
 import com.packtpub.reactive.seven.BlockingExample;
-import com.packtpub.reactive.six.BufferingExamples;
-import com.packtpub.reactive.six.IntervalAndSchedulers;
-import com.packtpub.reactive.six.ParallelRequestsExample;
-import com.packtpub.reactive.six.SchedulersExamples;
-import com.packtpub.reactive.six.SchedulersTypesExamples;
 
 /**
  * The main class of this project it is able to run all the examples.

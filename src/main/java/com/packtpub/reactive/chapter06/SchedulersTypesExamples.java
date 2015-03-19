@@ -1,4 +1,4 @@
-package com.packtpub.reactive.six;
+package com.packtpub.reactive.chapter06;
 
 import java.util.ArrayList;
 import java.util.List;

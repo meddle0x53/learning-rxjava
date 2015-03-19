@@ -1,4 +1,4 @@
-package com.packtpub.reactive.six;
+package com.packtpub.reactive.chapter06;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
