@@ -135,3 +135,8 @@ The example can be found here [FilteringExamples](https://github.com/meddle0x53/
 Demonstrates the scan operator and contains an example of working with data using the majority of the operators learned through the chapter.
 
 The example can be found here [ScanAndUsingMultipleOperators](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter04/ScanAndUsingMultipleOperators.java)
+
+#### 22. Examples of combining Observables (Chapter 5, pages 82-88)
+Demonstrates combining Observables using Observable.zip, Observable.merge and Observable.concat.
+
+The example can be found here [CombiningObservables](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/CombiningObservables.java)
