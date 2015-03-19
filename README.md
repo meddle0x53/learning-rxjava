@@ -146,3 +146,9 @@ Demonstration of using the Observable.amb, Observable.takeWhile, Observable.take
 Observable.skipUntil and Observable.defaultIfEmpty.
 
 The example can be found here [Conditionals](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/Conditionals.java)
+
+#### 24. Examples of handling errors (Chapter 5, pages 92-95)
+A demonstrates working with Observable.onErrorReturn, Observable.onErrorResumeNext and Observable.onExceptionResumeNext
+as well as retrying with Observable.retry and Observable.retryWhen.
+
+The example can be found here [HandlingErrors](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/HandlingErrors.java)
