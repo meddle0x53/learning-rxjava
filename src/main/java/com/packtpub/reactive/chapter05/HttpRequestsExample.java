@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -20,11 +21,17 @@ import com.google.gson.Gson;
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Using multiple {@link Observable} operators in order to handle and augment an HTTP response
+ * from Github.
+ * 
+ * @author meddle
+ */
 public class HttpRequestsExample implements Program {
 
 	@Override
 	public String name() {
-		return "Example of doing HTTP requests and handling responses with Observables.";
+		return "Example of doing HTTP requests and handling responses with Observables";
 	}
 
 	@Override
@@ -51,17 +58,19 @@ public class HttpRequestsExample implements Program {
 	@Override
 	public void run() {
 		try(CloseableHttpAsyncClient client = HttpAsyncClients.createDefault()) {
+
 			client.start();
 
 			String username = "meddle0x53";
 
 			Observable<Map> resp = githubUserInfoRequest(client, username);
 			
-			subscribePrint(resp.map(json -> json.get("name") + "(" + json.get("language") + ")"), "Json");
+			subscribePrint(resp
+					.map(json -> json.get("name") + "(" + json.get("language") + ")")
+					, "Json");
 
-			try {
-				Thread.sleep(6000L);
-			} catch (InterruptedException e) {}
+
+			CountDownLatch latch = new CountDownLatch(1);
 
 			resp = githubUserInfoRequest(client, username);
 			
@@ -78,13 +87,14 @@ public class HttpRequestsExample implements Program {
 				.flatMap(supporter -> githubUserInfoRequest(client, supporter).take(3))
 				.filter(json -> json.containsKey("full_name"))
 				.map(json -> json.get("full_name"))
-				.cast(String.class);
+				.cast(String.class)
+				.doOnCompleted(() -> latch.countDown());
 			
 			subscribePrint(starGazers, "Star Gazers");
 
 
 			try {
-				Thread.sleep(6000L);
+				latch.await();
 			} catch (InterruptedException e) {}
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -137,4 +147,7 @@ public class HttpRequestsExample implements Program {
 		return Observable.amb(fromCache(url), response);
 	}
 
+	public static void main(String[] args) {
+		new HttpRequestsExample().run();
+	}
 }
