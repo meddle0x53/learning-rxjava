@@ -141,7 +141,7 @@ Demonstrates combining Observables using Observable.zip, Observable.merge and Ob
 
 The example can be found here [CombiningObservables](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/CombiningObservables.java)
 
-#### 23. Some examples of using conditionals (Chapter 5, pages 82-88)
+#### 23. Some examples of using conditionals (Chapter 5, pages 88-91)
 Demonstration of using the Observable.amb, Observable.takeWhile, Observable.takeUntil,
 Observable.skipUntil and Observable.defaultIfEmpty.
 
