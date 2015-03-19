@@ -32,7 +32,7 @@ import com.packtpub.reactive.chapter04.VariousTransformationsDemonstration;
 import com.packtpub.reactive.chapter04.ScanAndUsingMultipleOperators;
 import com.packtpub.reactive.chapter05.CombiningObservables;
 import com.packtpub.reactive.chapter05.Conditionals;
-import com.packtpub.reactive.chapter05.HandlingErrorsExamples;
+import com.packtpub.reactive.chapter05.HandlingErrors;
 import com.packtpub.reactive.chapter05.HttpRequestsExample;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
@@ -290,7 +290,7 @@ public class Runner {
 				new FilteringExamples(), new ScanAndUsingMultipleOperators(),
 				new CombiningObservables(),
 				new Conditionals(),
-				new HandlingErrorsExamples(),
+				new HandlingErrors(),
 				new HttpRequestsExample(),
 				new IntervalAndSchedulers(),
 				new SchedulersTypesExamples(),

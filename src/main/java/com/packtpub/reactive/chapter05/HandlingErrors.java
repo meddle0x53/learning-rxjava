@@ -9,7 +9,13 @@ import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
-public class HandlingErrorsExamples implements Program {
+/**
+ * Demonstrates working with {@link Observable#onErrorReturn}, {@link Observable#onErrorResumeNext} and {@link Observable#onExceptionResumeNext}
+ * as well as retrying with {@link Observable#retry} and {@link Observable#retryWhen}.
+ * 
+ * @author meddle
+ */
+public class HandlingErrors implements Program {
 	
 	private int throwAnError = 3;
 
@@ -59,7 +65,6 @@ public class HandlingErrorsExamples implements Program {
 			assert !number.equals("three");
 			}).map(Integer::parseInt).onErrorResumeNext(Observable.just(5, 6, 7));
 
-		
 		subscribePrint(n, "on error resume next 2");
 		
 		
@@ -102,6 +107,10 @@ public class HandlingErrorsExamples implements Program {
 		
 		subscribePrint(when, "retryWhen");
 		
+	}
+	
+	public static void main(String[] args) {
+		new HandlingErrors().run();
 	}
 
 }
