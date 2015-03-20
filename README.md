@@ -157,3 +157,8 @@ The example can be found here [HandlingErrors](https://github.com/meddle0x53/lea
 Using multiple Observable operators in order to handle and augment an HTTP response from Github.
 
 The example can be found here [HttpRequestsExample](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter05/HttpRequestsExample.java)
+
+#### 26. Observable.interval and Schedulers (Chapter 6, pages 103-105)
+More information of Observable.interval and its default Scheduler. Contains an example of debugging information of the emitted items and the current Thread.
+
+The example can be found here [IntervalAndSchedulers](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/IntervalAndSchedulers.java)
