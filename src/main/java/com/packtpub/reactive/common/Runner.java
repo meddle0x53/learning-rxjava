@@ -38,7 +38,7 @@ import com.packtpub.reactive.chapter06.BufferingExamples;
 import com.packtpub.reactive.chapter06.IntervalAndSchedulers;
 import com.packtpub.reactive.chapter06.ParallelRequestsExample;
 import com.packtpub.reactive.chapter06.SchedulersExamples;
-import com.packtpub.reactive.chapter06.SchedulersTypesExamples;
+import com.packtpub.reactive.chapter06.SchedulersTypes;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -293,7 +293,7 @@ public class Runner {
 				new HandlingErrors(),
 				new HttpRequestsExample(),
 				new IntervalAndSchedulers(),
-				new SchedulersTypesExamples(),
+				new SchedulersTypes(),
 				new SchedulersExamples(),
 				new ParallelRequestsExample(),
 				new BufferingExamples(),

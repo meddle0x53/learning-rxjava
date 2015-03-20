@@ -3,6 +3,7 @@ package com.packtpub.reactive.chapter06;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Scheduler;
@@ -12,11 +13,18 @@ import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
-public class SchedulersTypesExamples implements Program {
+/**
+ * A collection of examples of using the different {@link Scheduler}s.
+ * 
+ * @author meddle
+ */
+public class SchedulersTypes implements Program {
+	
+	private CountDownLatch latch = new CountDownLatch(10);
 
 	@Override
 	public String name() {
-		return "Demonstrates the different Schedulers types.";
+		return "Demonstration of the different Schedulers types";
 	}
 
 	@Override
@@ -50,6 +58,8 @@ public class SchedulersTypesExamples implements Program {
 					System.out.println("  Remove : " + Thread.currentThread().getName());
 					list.remove(0);
 					System.out.println("  End remove : " + Thread.currentThread().getName());
+				} else {
+					latch.countDown();
 				}
 			}
 
@@ -102,7 +112,6 @@ public class SchedulersTypesExamples implements Program {
 		System.out.println("Spawn!");
 		schedule(Schedulers.trampoline(), 2, false);
 		
-		
 		System.out.println("New thread");
 		schedule(Schedulers.newThread(), 2, true);
 		System.out.println("Spawn!");
@@ -118,6 +127,13 @@ public class SchedulersTypesExamples implements Program {
 		System.out.println("Spawn!");
 		schedule(Schedulers.io(), 2, false);
 		
+		try {
+			latch.await();
+		} catch (InterruptedException e) {}
+	}
+	
+	public static void main(String[] args) {
+		new SchedulersTypes().run();
 	}
 
 }
