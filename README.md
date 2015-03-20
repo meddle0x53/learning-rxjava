@@ -162,3 +162,8 @@ The example can be found here [HttpRequestsExample](https://github.com/meddle0x5
 More information of Observable.interval and its default Scheduler. Contains an example of debugging information of the emitted items and the current Thread.
 
 The example can be found here [IntervalAndSchedulers](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/IntervalAndSchedulers.java)
+
+#### 27. Demonstration of the different Schedulers types (Chapter 6, pages 106-114)
+A collection of examples of using the different Schedulers.
+
+The example can be found here [SchedulersTypes](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/SchedulersTypes.java)
