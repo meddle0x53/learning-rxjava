@@ -1,17 +1,24 @@
 package com.packtpub.reactive.chapter06;
 
 import static com.packtpub.reactive.common.Helpers.debug;
+
+import java.util.concurrent.CountDownLatch;
+
 import rx.Observable;
-import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
+/**
+ * Demonstrates using subscribeOn and observeOn.
+ *
+ * @author meddle
+ */
 public class SchedulersExamples implements Program {
 
 	@Override
 	public String name() {
-		return "A few examples of how Schedulers work.";
+		return "A few examples of how Schedulers work";
 	}
 
 	@Override
@@ -21,13 +28,7 @@ public class SchedulersExamples implements Program {
 
 	@Override
 	public void run() {
-		Object monitor = new Object();
-
-		Action0 free = () -> {
-			synchronized (monitor) {
-				monitor.notify();
-			}
-		};
+		CountDownLatch latch = new CountDownLatch(1);
 
 		Observable<Integer> range = Observable
 				.range(20, 5)
@@ -46,17 +47,18 @@ public class SchedulersExamples implements Program {
 				.map(n -> Character.toChars(n))
 				.map(c -> c[0])
 				.doOnEach(debug("Chars ", "    "))
-				.doOnCompleted(free);
+				.doOnCompleted(() -> latch.countDown());
 		
 		chars.subscribe();
 
 		System.out.println("Hey!");
 		
-		synchronized (monitor) {
-			try {
-				monitor.wait(5000L);
-			} catch (InterruptedException e) {}
-		}
+		try {
+			latch.await();
+		} catch (InterruptedException e) {}
 	}
 
+	public static void main(String[] args) {
+		new SchedulersExamples().run();
+	}
 }

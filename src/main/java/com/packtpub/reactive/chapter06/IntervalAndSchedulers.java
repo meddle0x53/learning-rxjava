@@ -2,19 +2,25 @@ package com.packtpub.reactive.chapter06;
 
 import static com.packtpub.reactive.common.Helpers.debug;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.functions.Action0;
+import rx.Scheduler;
 import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
 
+/**
+ * More information of {@link Observable#interval} and its default {@link Scheduler}.
+ * 
+ * @author meddle
+ */
 public class IntervalAndSchedulers implements Program {
 
 	@Override
 	public String name() {
-		return "Observable.interval and Schedulers.";
+		return "Observable.interval and Schedulers";
 	}
 
 	@Override
@@ -24,14 +30,7 @@ public class IntervalAndSchedulers implements Program {
 
 	@Override
 	public void run() {
-		Object monitor = new Object();
-
-		Action0 free = () -> {
-			System.out.println("Freeing main Thread");
-			synchronized (monitor) {
-				monitor.notify();
-			}
-		};
+		CountDownLatch latch = new CountDownLatch(1);
 		
 		Observable.range(5, 5).doOnEach(debug("Test")).subscribe();
 		
@@ -39,21 +38,22 @@ public class IntervalAndSchedulers implements Program {
 			.interval(500L, TimeUnit.MILLISECONDS)
 			.take(5)
 			.doOnEach(debug("Default interval"))
-			.doOnCompleted(free)
+			.doOnCompleted(() -> latch.countDown())
 			.subscribe();
 		
-		synchronized (monitor) {
-			try {
-				monitor.wait(5000L);
-			} catch (InterruptedException e) {}
-		}
-		
+		try {
+			latch.await();
+		} catch (InterruptedException e) {}
+
 		Observable
 		.interval(500L, TimeUnit.MILLISECONDS, Schedulers.immediate())
 		.take(5)
 		.doOnEach(debug("Imediate interval"))
-		.doOnCompleted(free)
 		.subscribe();
+	}
+	
+	public static void main(String[] args) {
+		new IntervalAndSchedulers().run();
 	}
 
 }
