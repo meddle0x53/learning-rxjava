@@ -3,6 +3,7 @@ package com.packtpub.reactive.chapter06;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -12,11 +13,18 @@ import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Helpers;
 import com.packtpub.reactive.common.Program;
 
-public class BufferingExamples implements Program {
+/**
+ * Demonstrates using the {@link Observable#sample}, {@link Observable#buffer}, {@link Observable#window}
+ * {@link Observable#throttleLast}, {@link Observable#debounce}, {@link Observable#onBackpressureDrop} and
+ * {@link Observable#onBackpressureBuffer} operators.
+ * 
+ * @author meddle
+ */
+public class BackpressureExamples implements Program {
 
 	@Override
 	public String name() {
-		return "Examples demonstrating buffering.";
+		return "Examples demonstrating backpressure and buffering operators";
 	}
 
 	@Override
@@ -27,6 +35,7 @@ public class BufferingExamples implements Program {
 	@Override
 	public void run() {
 
+		CountDownLatch latch = new CountDownLatch(7);
 		
 		Path path = Paths.get("src", "main", "resources");
 		
@@ -40,11 +49,13 @@ public class BufferingExamples implements Program {
 		});
 		
 		Helpers.subscribePrint(
-				data.sample(Observable.interval(100L, TimeUnit.MILLISECONDS)),
+				data.sample(Observable.interval(90L, TimeUnit.MILLISECONDS))
+				.doOnCompleted(() -> latch.countDown()),
 				"sample(Observable)");
 
 		Helpers.subscribePrint(
-				data.throttleLast(100L, TimeUnit.MILLISECONDS),
+				data.throttleLast(100L, TimeUnit.MILLISECONDS)
+				.doOnCompleted(() -> latch.countDown()),
 				"throttleLast(long, TimeUnit)");
 		
 		Observable<Object> sampler = Observable.create(subscriber -> {
@@ -68,32 +79,41 @@ public class BufferingExamples implements Program {
 		
 
 		Helpers.subscribePrint(
-				data.sample(sampler).debounce(15L, TimeUnit.MILLISECONDS),
+				data.sample(sampler).debounce(15L, TimeUnit.MILLISECONDS)
+				.doOnCompleted(() -> latch.countDown()),
 				"sample(Observable).debounce(long, TimeUnit)");
 		
 
 		Helpers.subscribePrint(
-				data.buffer(2, 1500),
+				data.buffer(2, 1500)
+				.doOnCompleted(() -> latch.countDown()),
 				"buffer(int, int)");
 		
 
 		Helpers.subscribePrint(
-				data.window(3L, 200L, TimeUnit.MILLISECONDS).flatMap(o -> o),
+				data.window(3L, 200L, TimeUnit.MILLISECONDS).flatMap(o -> o)
+				.doOnCompleted(() -> latch.countDown()),
 				"window(long, long, TimeUnit)");
 		
 		
 		Helpers.subscribePrint(
-				data.onBackpressureBuffer(10000),
+				data.onBackpressureBuffer(10000)
+				.doOnCompleted(() -> latch.countDown()),
 				"onBackpressureBuffer(int)");
 
 		Helpers.subscribePrint(
-				data.onBackpressureDrop(),
+				data.onBackpressureDrop()
+				.doOnCompleted(() -> latch.countDown()),
 				"onBackpressureDrop");
 
 		try {
-			Thread.sleep(10000L);
+			latch.await(15L, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 		}
+	}
+	
+	public static void main(String[] args) {
+		new BackpressureExamples().run();
 	}
 
 }
