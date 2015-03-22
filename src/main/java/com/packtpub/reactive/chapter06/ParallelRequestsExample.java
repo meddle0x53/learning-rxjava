@@ -2,6 +2,7 @@ package com.packtpub.reactive.chapter06;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -13,11 +14,16 @@ import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
 
+/**
+ * Demonstrates parallelism by executing a number of requests in parallel.
+ * 
+ * @author meddle
+ */
 public class ParallelRequestsExample implements Program {
 
 	@Override
 	public String name() {
-		return "Demonstrates parallel requests.";
+		return "Demonstraton of parallelism";
 	}
 
 	@Override
@@ -28,7 +34,10 @@ public class ParallelRequestsExample implements Program {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void run() {
-		try(CloseableHttpAsyncClient client = HttpAsyncClients.createDefault()) {
+		CloseableHttpAsyncClient client = HttpAsyncClients.createDefault();
+		CountDownLatch latch = new CountDownLatch(1);
+		
+		try {
 			client.start();
 			
 			Observable<Map> response = CreateObservable.requestJson(client, "https://api.github.com/users/meddle0x53/followers");
@@ -45,15 +54,22 @@ public class ParallelRequestsExample implements Program {
 			)
 			.doOnNext(follower -> System.out.println(follower))
 			.reduce(0.0, (sum, cur) -> sum + 1)
+			.doOnCompleted(() -> latch.countDown())
 			.subscribe(sum -> System.out.println("meddle0x53 : " + sum));
 
 			try {
-				Thread.sleep(6000L);
+				latch.await();
 			} catch (InterruptedException e) {}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 
+		} finally {
+			try {
+				client.close();
+			} catch (IOException e) {}
+		}
+	}
+	
+	public static void main(String[] args) {
+		new ParallelRequestsExample().run();
 	}
 
 }
