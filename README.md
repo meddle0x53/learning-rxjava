@@ -167,3 +167,8 @@ The example can be found here [IntervalAndSchedulers](https://github.com/meddle0
 A collection of examples of using the different Schedulers.
 
 The example can be found here [SchedulersTypes](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/SchedulersTypes.java)
+
+#### 28. A few examples of observeOn and subscribeOn (Chapter 6, pages 115-119)
+Demonstrates using subscribeOn and observeOn with Schedulers and Observables
+
+The example can be found here [SubscribeOnAndObserveOn](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/SubscribeOnAndObserveOn.java)
