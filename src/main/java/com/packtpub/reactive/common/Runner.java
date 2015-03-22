@@ -39,10 +39,10 @@ import com.packtpub.reactive.chapter06.IntervalAndSchedulers;
 import com.packtpub.reactive.chapter06.ParallelRequestsExample;
 import com.packtpub.reactive.chapter06.SubscribeOnAndObserveOn;
 import com.packtpub.reactive.chapter06.SchedulersTypes;
+import com.packtpub.reactive.chapter07.BlockingExample;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
-import com.packtpub.reactive.seven.BlockingExample;
 
 /**
  * The main class of this project it is able to run all the examples.

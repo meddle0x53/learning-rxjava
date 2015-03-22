@@ -1,4 +1,4 @@
-package com.packtpub.reactive.seven;
+package com.packtpub.reactive.chapter07;
 
 import java.io.StringReader;
 import java.util.Iterator;
