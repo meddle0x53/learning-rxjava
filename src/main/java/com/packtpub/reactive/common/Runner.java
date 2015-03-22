@@ -39,7 +39,7 @@ import com.packtpub.reactive.chapter06.IntervalAndSchedulers;
 import com.packtpub.reactive.chapter06.ParallelRequestsExample;
 import com.packtpub.reactive.chapter06.SubscribeOnAndObserveOn;
 import com.packtpub.reactive.chapter06.SchedulersTypes;
-import com.packtpub.reactive.chapter07.BlockingExample;
+import com.packtpub.reactive.chapter07.BlockingObservablesAndOperators;
 import com.packtpub.reactive.eight.ComposeExample;
 import com.packtpub.reactive.eight.LiftExample;
 import com.packtpub.reactive.eight.ResourceManagementExample;
@@ -297,7 +297,7 @@ public class Runner {
 				new SubscribeOnAndObserveOn(),
 				new ParallelRequestsExample(),
 				new BackpressureExamples(),
-				new BlockingExample(),
+				new BlockingObservablesAndOperators(),
 				new ResourceManagementExample(),
 				new LiftExample(),
 				new ComposeExample()

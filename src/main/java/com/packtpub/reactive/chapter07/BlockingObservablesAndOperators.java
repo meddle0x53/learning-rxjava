@@ -6,15 +6,24 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.observables.BlockingObservable;
 
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
-public class BlockingExample implements Program {
+/**
+ * Examples of using {@link BlockingObservable} and their operators -
+ * {@link BlockingObservable#forEach}, {@link BlockingObservable#first}, {@link BlockingObservable#next},
+ * {@link BlockingObservable#last} and {@link BlockingObservable#single}.
+ * Includes examples of {@link Observable#count} and {@link Observable#toList} combined with the {@link Observable#toBlocking}.
+ * 
+ * @author meddle
+ */
+public class BlockingObservablesAndOperators implements Program {
 
 	@Override
 	public String name() {
-		return "Demonstrates blocking Observables";
+		return "A demonstration of using blocking Observables";
 	}
 
 	@Override
@@ -75,6 +84,10 @@ public class BlockingExample implements Program {
 
 		System.out.println(observable.count().toBlocking().first());
 		System.out.println(observable.toList().toBlocking().first());
+	}
+	
+	public static void main(String[] args) {
+		new BlockingObservablesAndOperators().run();
 	}
 
 }
