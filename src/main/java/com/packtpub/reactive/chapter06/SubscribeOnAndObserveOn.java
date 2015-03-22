@@ -10,15 +10,15 @@ import rx.schedulers.Schedulers;
 import com.packtpub.reactive.common.Program;
 
 /**
- * Demonstrates using subscribeOn and observeOn.
+ * Demonstrates using subscribeOn and observeOn with {@link Schedulers} and {@link Observable}s.
  *
  * @author meddle
  */
-public class SchedulersExamples implements Program {
+public class SubscribeOnAndObserveOn implements Program {
 
 	@Override
 	public String name() {
-		return "A few examples of how Schedulers work";
+		return "A few examples of observeOn and subscribeOn";
 	}
 
 	@Override
@@ -59,6 +59,6 @@ public class SchedulersExamples implements Program {
 	}
 
 	public static void main(String[] args) {
-		new SchedulersExamples().run();
+		new SubscribeOnAndObserveOn().run();
 	}
 }
