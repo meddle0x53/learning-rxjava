@@ -177,3 +177,10 @@ The example can be found here [SubscribeOnAndObserveOn](https://github.com/meddl
 Demonstrates parallelism by executing a number of requests in parallel.
 
 The example can be found here [ParallelRequestsExample](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/ParallelRequestsExample.java)
+
+#### 30. Examples demonstrating backpressure and buffering operators (Chapter 6, pages 122-127)
+Demonstrates using the Observable#sample, Observable#buffer, Observable#window
+Observable#throttleLast, Observable#debounce, Observable#onBackpressureDrop and
+Observable#onBackpressureBuffer operators
+
+The example can be found here [BackpressureExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/BackpressureExamples.java)
