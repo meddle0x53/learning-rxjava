@@ -14,6 +14,11 @@ import rx.schedulers.TestScheduler;
 
 import com.packtpub.reactive.common.CreateObservable;
 
+/**
+ * A unit test testing the custom {@link CreateObservable#interval} method.
+ * 
+ * @author meddle
+ */
 public class CreateObservableIntervalTest {
 
 	@Test(expected = IllegalArgumentException.class) 
