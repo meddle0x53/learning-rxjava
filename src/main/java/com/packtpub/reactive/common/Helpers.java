@@ -13,6 +13,11 @@ import rx.Observable;
 import rx.Subscription;
 import rx.functions.Action1;
 
+/**
+ * Contains a set of helper methods, used in the examples.
+ * 
+ * @author meddle
+ */
 public final class Helpers {
 
 	public static <T> Subscription subscribePrint(Observable<T> observable,

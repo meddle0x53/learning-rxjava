@@ -1,4 +1,4 @@
-package com.packtpub.reactive.eight;
+package com.packtpub.reactive.chapter08;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import rx.Observable;
 
-import com.packtpub.reactive.eight.ComposeExample.OddFilter;
+import com.packtpub.reactive.chapter08.ComposeExample.OddFilter;
 
 public class OddFilterTest {
 

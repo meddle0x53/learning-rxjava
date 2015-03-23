@@ -1,4 +1,4 @@
-package com.packtpub.reactive.eight;
+package com.packtpub.reactive.chapter08;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -6,10 +6,10 @@ import java.nio.file.Paths;
 import rx.Observable;
 import rx.Observable.Transformer;
 
+import com.packtpub.reactive.chapter08.LiftExample.Indexed;
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Helpers;
 import com.packtpub.reactive.common.Program;
-import com.packtpub.reactive.eight.LiftExample.Indexed;
 
 public class ComposeExample implements Program {
 	

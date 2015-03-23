@@ -140,7 +140,10 @@ public class ReactiveSumV1 implements Program {
 	 * Here the input is executed on a separate thread, so we block the current one until it sends
 	 * a `completed` notification.
 	 */
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
+		System.out.println();
+		System.out.println("Reacitve Sum. Type 'a: <number>' and 'b: <number>' to try it.");
+		
 		new ReactiveSumV1().run();
 	}
 }

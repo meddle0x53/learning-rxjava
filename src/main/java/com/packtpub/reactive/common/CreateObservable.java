@@ -41,6 +41,11 @@ import rx.schedulers.Schedulers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * Contains a set of methods for creating custom {@link Observable}s.
+ * 
+ * @author meddle
+ */
 public class CreateObservable {
 
 	public static Observable<String> from(final Path path) {
@@ -114,15 +119,6 @@ public class CreateObservable {
 		});
 	}
 
-	private static Observable<String> in = null;
-
-	public static Observable<String> input() {
-		if (in == null) {
-			in = from(System.in).refCount();
-		}
-		return in;
-	}
-	
 	public static final Path CACHE_DIR = Paths.get("src", "main", "resources", "cache");
 	
 	private static Map<String, Cache> cache = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.packtpub.reactive.eight;
+package com.packtpub.reactive.chapter08;
 
 import java.io.IOException;
 

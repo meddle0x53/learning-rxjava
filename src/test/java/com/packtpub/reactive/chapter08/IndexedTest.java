@@ -1,4 +1,4 @@
-package com.packtpub.reactive.eight;
+package com.packtpub.reactive.chapter08;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import rx.Observable;
 
-import com.packtpub.reactive.eight.LiftExample.Indexed;
-import com.packtpub.reactive.eight.LiftExample.Pair;
+import com.packtpub.reactive.chapter08.LiftExample.Indexed;
+import com.packtpub.reactive.chapter08.LiftExample.Pair;
 
 public class IndexedTest {
 
