@@ -2,10 +2,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
 
-mainClassName = 'com.packtpub.reactive.common.Runner'
+mainClassName = 'com.packtpub.reactive.chapter01.ReactiveSumV1'
 
 sourceCompatibility = 1.8
-version = '1.0'
+version = '1.1'
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'Reactive Java Examples', 'Implementation-Version': version
@@ -43,7 +44,7 @@ task(rxrun, dependsOn: 'classes') << {
         'java',
         '-ea',
         '-cp', classpath.collect().join(System.getProperty('path.separator')),
-        'com.packtpub.reactive.common.Runner',
+        'com.packtpub.reactive.chapter01.ReactiveSumV1',
         '--color'
     ]
 
