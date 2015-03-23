@@ -184,3 +184,11 @@ Observable#throttleLast, Observable#debounce, Observable#onBackpressureDrop and
 Observable#onBackpressureBuffer operators
 
 The example can be found here [BackpressureExamples](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter06/BackpressureExamples.java)
+
+#### 31. A demonstration of using Blocking Observables (Chapter 7, pages 133-136)
+Examples of using BlockingObservable and their operators -
+BlockingObservable#forEach, BlockingObservable#first, BlockingObservable#next,
+BlockingObservable#last and BlockingObservable#single.
+Includes examples of Observable#count and Observable#toList combined with the Observable#toBlocking operator.
+
+The example can be found here [BlockingObservablesAndOperators](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter07/BlockingObservablesAndOperators.java)
