@@ -23,7 +23,7 @@ public class BlockingObservablesAndOperators implements Program {
 
 	@Override
 	public String name() {
-		return "A demonstration of using blocking Observables";
+		return "A demonstration of using Blocking Observables";
 	}
 
 	@Override
