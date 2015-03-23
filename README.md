@@ -197,3 +197,8 @@ The example can be found here [BlockingObservablesAndOperators](https://github.c
 Includes simple subscription test, test with BlockingObservable and test with TestSubscriber.
 
 The example can be found here [SortedObservableTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter07/SortedObservableTest.java)
+
+#### 33. Example of testing asynchronous Observables (Chapter 7, pages 139-140)
+A unit test testing the custom reateObservable#interval method.
+
+The example can be found here [CreateObservableIntervalTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter07/CreateObservableIntervalTest.java)
