@@ -15,6 +15,11 @@ import rx.observers.TestSubscriber;
 
 import com.packtpub.reactive.common.CreateObservable;
 
+/**
+ * Demonstrates testing the same thing using different methods.
+ * 
+ * @author meddle
+ */
 public class SortedObservableTest {
 	
 	private Observable<String> tested;
