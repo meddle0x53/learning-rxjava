@@ -192,3 +192,8 @@ BlockingObservable#last and BlockingObservable#single.
 Includes examples of Observable#count and Observable#toList combined with the Observable#toBlocking operator.
 
 The example can be found here [BlockingObservablesAndOperators](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter07/BlockingObservablesAndOperators.java)
+
+#### 32. Unit test demonstrating different ways of testing Observables (Chapter 7, pages 131-133, 136-138)
+Includes simple subscription test, test with BlockingObservable and test with TestSubscriber.
+
+The example can be found here [SortedObservableTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter07/SortedObservableTest.java)
