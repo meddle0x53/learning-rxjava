@@ -216,3 +216,8 @@ The example can be found here [Lift](https://github.com/meddle0x53/learning-rxja
 #### 36. Unit test for the Indexed operator (Chapter 8, pages 152-153)
 
 The example can be found here [IndexedTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter08/IndexedTest.java)
+
+#### 37. Demonstration of the Observable.compose operator (Chapter 8, pages 153)
+Example of implementing a Transformer and passing it to Observable#compose.
+
+The example can be found here [Compose](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter08/Compose.java)
