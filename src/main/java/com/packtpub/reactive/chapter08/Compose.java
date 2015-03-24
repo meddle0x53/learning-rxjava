@@ -11,7 +11,12 @@ import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Helpers;
 import com.packtpub.reactive.common.Program;
 
-public class ComposeExample implements Program {
+/**
+ * Example of implementing a {@link Transformer} and passing it to {@link Observable#compose}.
+ * 
+ * @author meddle
+ */
+public class Compose implements Program {
 	
 	public static class OddFilter<T> implements Transformer<T, T> {
 
@@ -27,7 +32,7 @@ public class ComposeExample implements Program {
 
 	@Override
 	public String name() {
-		return "Demonstrates using the Observable.compose operator.";
+		return "Demonstration of the Observable.compose operator";
 	}
 
 	@Override
@@ -45,7 +50,7 @@ public class ComposeExample implements Program {
 	}
 	
 	public static void main(String[] args) {
-		new ComposeExample().run();
+		new Compose().run();
 	}
 
 }

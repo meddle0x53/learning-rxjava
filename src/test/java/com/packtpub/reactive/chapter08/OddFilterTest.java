@@ -8,9 +8,15 @@ import java.util.List;
 import org.junit.Test;
 
 import rx.Observable;
+import rx.Observable.Transformer;
 
-import com.packtpub.reactive.chapter08.ComposeExample.OddFilter;
+import com.packtpub.reactive.chapter08.Compose.OddFilter;
 
+/**
+ * Test for the {@link OddFilter} {@link Transformer}.
+ * 
+ * @author meddle
+ */
 public class OddFilterTest {
 
 	@Test
