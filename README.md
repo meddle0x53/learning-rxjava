@@ -202,3 +202,8 @@ The example can be found here [SortedObservableTest](https://github.com/meddle0x
 A unit test testing the custom reateObservable#interval method.
 
 The example can be found here [CreateObservableIntervalTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter07/CreateObservableIntervalTest.java)
+
+#### 34. Resource management demonstration (Chapter 8, pages 142-148)
+Demonstration of custom resource management with Observable#using
+
+The example can be found here [ResourceManagement](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter08/ResourceManagement.java)
