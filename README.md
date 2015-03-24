@@ -204,6 +204,15 @@ A unit test testing the custom reateObservable#interval method.
 The example can be found here [CreateObservableIntervalTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter07/CreateObservableIntervalTest.java)
 
 #### 34. Resource management demonstration (Chapter 8, pages 142-148)
-Demonstration of custom resource management with Observable#using
+Demonstration of custom resource management with Observable#using.
 
 The example can be found here [ResourceManagement](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter08/ResourceManagement.java)
+
+#### 35. Example of using Observable#lift for executing custom operators (Chapter 8, pages 148-152)
+Demonstrates implementing values with indices using lift and the custom operator Indexed.
+
+The example can be found here [Lift](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter08/Lift.java)
+
+#### 36. Unit test for the Indexed operator (Chapter 8, pages 152-153)
+
+The example can be found here [IndexedTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter08/IndexedTest.java)
