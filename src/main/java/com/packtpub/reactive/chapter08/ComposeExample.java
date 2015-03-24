@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import rx.Observable;
 import rx.Observable.Transformer;
 
-import com.packtpub.reactive.chapter08.LiftExample.Indexed;
+import com.packtpub.reactive.chapter08.Lift.Indexed;
 import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Helpers;
 import com.packtpub.reactive.common.Program;

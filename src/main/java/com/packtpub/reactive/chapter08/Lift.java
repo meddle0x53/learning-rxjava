@@ -11,7 +11,12 @@ import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Helpers;
 import com.packtpub.reactive.common.Program;
 
-public class LiftExample implements Program {
+/**
+ * Demonstrates implementing values with indices using lift and the custom operator {@link Indexed}.
+ * 
+ * @author meddle
+ */
+public class Lift implements Program {
 
 	public static class Pair<L, R> {
 		final L left;
@@ -119,7 +124,7 @@ public class LiftExample implements Program {
 	
 	@Override
 	public String name() {
-		return "Example of using Observable.lift for executing custom operators";
+		return "Example of using Observable#lift for executing custom operators";
 	}
 
 	@Override
@@ -138,7 +143,7 @@ public class LiftExample implements Program {
 	}
 	
 	public static void main(String[] args) {
-		new LiftExample().run();
+		new Lift().run();
 	}
 
 }

@@ -9,9 +9,14 @@ import org.junit.Test;
 
 import rx.Observable;
 
-import com.packtpub.reactive.chapter08.LiftExample.Indexed;
-import com.packtpub.reactive.chapter08.LiftExample.Pair;
+import com.packtpub.reactive.chapter08.Lift.Indexed;
+import com.packtpub.reactive.chapter08.Lift.Pair;
 
+/**
+ * Tests the {@link Indexed} operator.
+ * 
+ * @author meddle
+ */
 public class IndexedTest {
 
 	@Test
