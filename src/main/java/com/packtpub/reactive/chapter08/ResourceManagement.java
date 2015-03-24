@@ -15,11 +15,16 @@ import rx.functions.Func1;
 
 import com.packtpub.reactive.common.Program;
 
-public class ResourceManagementExample implements Program {
+/**
+ * Demonstration of custom resource management with {@link Observable#using}.
+ * 
+ * @author meddle
+ */
+public class ResourceManagement implements Program {
 
 	@Override
 	public String name() {
-		return "Resource management demonstration.";
+		return "Resource management demonstration";
 	}
 
 	@Override
@@ -76,6 +81,10 @@ public class ResourceManagementExample implements Program {
 		System.out.println("Subscribe 2:");
 		System.out.println(stringResponse.toBlocking().first());
 		
+	}
+	
+	public static void main(String[] args) {
+		new ResourceManagement().run();
 	}
 
 
