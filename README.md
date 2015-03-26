@@ -221,3 +221,7 @@ The example can be found here [IndexedTest](https://github.com/meddle0x53/learni
 Example of implementing a Transformer and passing it to Observable#compose.
 
 The example can be found here [Compose](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter08/Compose.java)
+
+#### 38. Unit test for the OddFilter Transformer. (Chapter 8, pages 154)
+
+The example can be found here [OddFilterTest](https://github.com/meddle0x53/learning-rxjava/blob/master/src/test/java/com/packtpub/reactive/chapter08/OddFilterTest.java)
