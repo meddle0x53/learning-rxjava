@@ -78,24 +78,24 @@ public class CreateObservable {
 		return Observable.create((Subscriber<? super String> subscriber) -> {
 			try {
 				String line;
-				while ((line = reader.readLine()) != null) {
+
+				if (subscriber.isUnsubscribed()) {
+					return;
+				}
+
+				while (!subscriber.isUnsubscribed() && (line = reader.readLine()) != null) {
 					if (line.equals("exit")) {
 						break;
 					}
+
 					subscriber.onNext(line);
 				}
-
-				subscriber.onCompleted();
 			} catch (IOException e) {
 				subscriber.onError(e);
-			} finally {
-				if (reader != null) {
-					try {
-						reader.close();
-					} catch (IOException e) {
-						subscriber.onError(e);
-					}
-				}
+			}
+
+			if (!subscriber.isUnsubscribed()) {
+				subscriber.onCompleted();
 			}
 		}).publish();
 	}
