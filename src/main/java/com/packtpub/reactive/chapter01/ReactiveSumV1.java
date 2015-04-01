@@ -56,7 +56,7 @@ public class ReactiveSumV1 implements Program {
 		}
 
 		public void onCompleted() {
-			System.out.println("Exiting last sum was : " + this.get());
+			System.out.println("Exiting last sum was : " + this.sum);
 			this.latch.countDown();
 		}
 
@@ -66,12 +66,8 @@ public class ReactiveSumV1 implements Program {
 		}
 
 		public void onNext(Double sum) {
-			System.out.println("update : a + b = " + sum);
 			this.sum = sum;
-		}
-
-		public double get() {
-			return this.sum;
+			System.out.println("update : a + b = " + sum);
 		}
 		
 		public CountDownLatch getLatch() {
@@ -86,7 +82,7 @@ public class ReactiveSumV1 implements Program {
 	 */
 	public static Observable<Double> varStream(final String varName,
 			Observable<String> input) {
-		final Pattern pattern = Pattern.compile("\\s*" + varName
+		final Pattern pattern = Pattern.compile("^\\s*" + varName
 				+ "\\s*[:|=]\\s*(-?\\d+\\.?\\d*)$");
 
 		return input.map(new Func1<String, Matcher>() {
