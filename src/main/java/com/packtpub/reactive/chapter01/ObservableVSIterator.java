@@ -3,7 +3,6 @@ package com.packtpub.reactive.chapter01;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import rx.Observable;
 import rx.functions.Action0;
@@ -24,17 +23,10 @@ public class ObservableVSIterator implements Program {
 
 		Iterator<String> iterator = list.iterator();
 
-		try {
-			// While there is a next element, PULL it from the source and print it.
-			while (iterator.hasNext()) {
-				System.out.println(iterator.next());
-			}
-
-			System.out.println("We've finnished!");
-		} catch (NoSuchElementException e) {
-			System.err.println(e);
+		// While there is a next element, PULL it from the source and print it.
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
 		}
-
 	}
 
 	private static void usingObservableExample() {
