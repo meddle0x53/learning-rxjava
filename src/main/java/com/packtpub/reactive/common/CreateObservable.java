@@ -40,6 +40,7 @@ import rx.schedulers.Schedulers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import static com.packtpub.reactive.common.checked.Uncheck.*;
 
 /**
  * Contains a set of methods for creating custom {@link Observable}s.
@@ -49,15 +50,10 @@ import com.google.gson.GsonBuilder;
 public class CreateObservable {
 
 	public static Observable<String> from(final Path path) {
-		return Observable.<String> create(subscriber -> {
-			try (BufferedReader reader = Files.newBufferedReader(path)) {
-				Observable<String> file = from(reader).refCount();
-				file.subscribe(subscriber::onNext, subscriber::onError,
-						subscriber::onCompleted);
-			} catch (IOException ioe) {
-				subscriber.onError(ioe);
-			}
-		});
+		return Observable.<String, BufferedReader> using(
+			uncheckedFunc0(() -> Files.newBufferedReader(path)),
+			reader -> from(reader).refCount(),
+			uncheckedAction1(reader -> reader.close()));
 	}
 
 	public static Observable<String> from(final Path path, Scheduler scheduler) {
@@ -101,22 +97,10 @@ public class CreateObservable {
 	}
 
 	public static Observable<Path> listFolder(Path dir, String glob) {
-		return Observable.<Path> create(subscriber -> {
-			DirectoryStream<Path> stream = null;
-			try {
-				stream = Files.newDirectoryStream(dir, glob);
-				Observable.<Path> from(stream).subscribe(subscriber::onNext,
-						subscriber::onError, subscriber::onCompleted);
-			} catch (DirectoryIteratorException ex) {
-				subscriber.onError(ex);
-			} catch (IOException ioe) {
-				subscriber.onError(ioe);
-			} finally {
-				try {
-					stream.close();
-				} catch (Exception e) {}
-			}
-		});
+		return Observable.<Path, DirectoryStream<Path>> using(
+			uncheckedFunc0(() -> Files.newDirectoryStream(dir, glob)),
+			dirStream -> Observable.from(dirStream),
+			uncheckedAction1(dirStream -> dirStream.close()));
 	}
 
 	public static final Path CACHE_DIR = Paths.get("src", "main", "resources", "cache");
