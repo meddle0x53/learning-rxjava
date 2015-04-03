@@ -51,9 +51,9 @@ public class CreateObservable {
 
 	public static Observable<String> from(final Path path) {
 		return Observable.<String, BufferedReader> using(
-			uncheckedFunc0(() -> Files.newBufferedReader(path)),
+			unchecked(() -> Files.newBufferedReader(path)),
 			reader -> from(reader).refCount(),
-			uncheckedAction1(reader -> reader.close()));
+			unchecked(reader -> reader.close()));
 	}
 
 	public static Observable<String> from(final Path path, Scheduler scheduler) {
@@ -98,9 +98,9 @@ public class CreateObservable {
 
 	public static Observable<Path> listFolder(Path dir, String glob) {
 		return Observable.<Path, DirectoryStream<Path>> using(
-			uncheckedFunc0(() -> Files.newDirectoryStream(dir, glob)),
+			unchecked(() -> Files.newDirectoryStream(dir, glob)),
 			dirStream -> Observable.from(dirStream),
-			uncheckedAction1(dirStream -> dirStream.close()));
+			unchecked(dirStream -> dirStream.close()));
 	}
 
 	public static final Path CACHE_DIR = Paths.get("src", "main", "resources", "cache");

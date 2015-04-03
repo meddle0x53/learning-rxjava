@@ -5,7 +5,7 @@ import rx.functions.Func0;
 
 public class Uncheck {
 	
-	public static <R> Func0<R> uncheckedFunc0(CheckedFunc0<R> f) {
+	public static <R> Func0<R> unchecked(CheckedFunc0<R> f) {
 		return () -> {
 			try {
 				return f.call();
@@ -15,7 +15,7 @@ public class Uncheck {
 		};
 	}
 	
-	public static <T> Action1<? super T> uncheckedAction1(CheckedAction1<? super T> a) {
+	public static <T> Action1<? super T> unchecked(CheckedAction1<? super T> a) {
 		return arg -> {
 			try {
 				a.call(arg);
