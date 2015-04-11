@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import rx.Notification;
 import rx.Observable;
 import rx.Subscription;
+import rx.exceptions.Exceptions;
 import rx.functions.Action1;
 
 /**
@@ -83,7 +84,8 @@ public final class Helpers {
 		};
 	}
 	
-	public static Observable<String> createFileOnNotFound(Throwable error) {
+	public static Observable<String> createFileOnNotFound(Throwable t) {
+		Throwable error = Exceptions.getFinalCause(t);
 		if (error instanceof NoSuchFileException) {
 			Path path = Paths.get(((NoSuchFileException) error).getFile());
 			try {
