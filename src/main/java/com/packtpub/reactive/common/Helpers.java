@@ -5,6 +5,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -34,6 +35,16 @@ public final class Helpers {
 							.collect(Collectors.joining("\n"))
 							);
 				}, () -> System.out.println(name + " ended!"));
+	}
+
+	/**
+	 * Subscribes to an observable, printing all its emissions.
+	 * Blocks until the observable calls onCompleted or onError.
+	 */
+	public static <T> void blockingSubscribePrint(Observable<T> observable, String name) {
+		CountDownLatch latch = new CountDownLatch(1);
+		subscribePrint(observable.finallyDo(() -> latch.countDown()), name);
+		try { latch.await(); } catch (InterruptedException e) {}
 	}
 
 	public static <T> Action1<Notification<? super T>> debug(String description) {
