@@ -1,7 +1,9 @@
 package com.packtpub.reactive.chapter05;
 
 import static com.packtpub.reactive.common.Helpers.subscribePrint;
+import static com.packtpub.reactive.common.Helpers.blockingSubscribePrint;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,15 @@ public class Conditionals implements Program {
 	@Override
 	public int chapter() {
 		return 5;
+	}
+
+	public void ambExample() {
+		Random r = new Random();
+		Observable<String> source1 = Observable.just("data from source 1")
+				.delay(r.nextInt(1000), TimeUnit.MILLISECONDS);
+		Observable<String> source2 = Observable.just("data from source 2")
+				.delay(r.nextInt(1000), TimeUnit.MILLISECONDS);
+		blockingSubscribePrint(Observable.amb(source1, source2), "Amb");
 	}
 
 	@Override
