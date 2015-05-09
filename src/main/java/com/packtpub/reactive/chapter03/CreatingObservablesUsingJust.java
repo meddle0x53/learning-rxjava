@@ -22,6 +22,7 @@ public class CreatingObservablesUsingJust implements Program {
 	}
 
 	public static class User {
+		
 		private final String forename;
 		private final String lastname;
 
@@ -31,17 +32,20 @@ public class CreatingObservablesUsingJust implements Program {
 		}
 
 		public String getForename() {
-			return forename;
+			return this.forename;
 		}
 
 		public String getLastname() {
-			return lastname;
+			return this.lastname;
 		}
+		
 	}
 
 	@Override
 	public void run() {
-		Observable.just('r', 'x', 'J', 'a', 'v', 'a').subscribe(
+		Observable.just('S').subscribe(System.out::println);
+		
+		Observable.just('R', 'x', 'J', 'a', 'v', 'a').subscribe(
 				System.out::print, System.err::println, System.out::println);
 
 		Observable.just(new User("Dali", "Bali"))

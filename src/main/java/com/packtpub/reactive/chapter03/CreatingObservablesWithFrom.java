@@ -50,9 +50,7 @@ public class CreatingObservablesWithFrom implements Program {
 
 		// from(Iterable)
 		Path resources = Paths.get("src", "main", "resources");
-		DirectoryStream<Path> dStream;
-		try {
-			dStream = Files.newDirectoryStream(resources);
+		try (DirectoryStream<Path> dStream = Files.newDirectoryStream(resources)) {
 			Observable<Path> dirObservable = Observable.from(dStream);
 			dirObservable.subscribe(System.out::println);
 		} catch (IOException e) {

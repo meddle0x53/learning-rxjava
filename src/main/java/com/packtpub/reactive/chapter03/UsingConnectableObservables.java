@@ -53,7 +53,7 @@ public class UsingConnectableObservables implements Program {
 
 		System.out.println("-----------------------------------");
 
-		Observable<Long> refCount = interval.share();
+		Observable<Long> refCount = interval.share(); // publish().refCount();
 
 		sub1 = subscribePrint(refCount, "First");
 		sub2 = subscribePrint(refCount, "Second");

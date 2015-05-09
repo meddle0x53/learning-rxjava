@@ -39,17 +39,23 @@ public class ObservableCreateExample implements Program {
 		return Observable.create(new OnSubscribe<T>() {
 			@Override
 			public void call(Subscriber<? super T> subscriber) {
-				Iterator<T> iterator = iterable.iterator();
+				try {
+					Iterator<T> iterator = iterable.iterator();
 
-				while (iterator.hasNext()) {
-					if (subscriber.isUnsubscribed()) {
-						return;
+					while (iterator.hasNext()) {
+						if (subscriber.isUnsubscribed()) {
+							return;
+						}
+						subscriber.onNext(iterator.next());
 					}
-					subscriber.onNext(iterator.next());
-				}
 
-				if (!subscriber.isUnsubscribed()) {
-					subscriber.onCompleted();
+					if (!subscriber.isUnsubscribed()) {
+						subscriber.onCompleted();
+					}
+				} catch (Exception e) {
+					if (!subscriber.isUnsubscribed()) {
+						subscriber.onError(e);
+					}
 				}
 
 			}
@@ -82,7 +88,7 @@ public class ObservableCreateExample implements Program {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ObservableCreateExample().run();
 	}

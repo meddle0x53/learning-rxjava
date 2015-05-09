@@ -40,9 +40,10 @@ public class CreatingObservablesUsingVariousFactoryMethods implements Program {
 		subscribePrint(Observable.error(new Exception("Test Error!")),
 				"Error Observable");
 
-		subscribePrint(Observable.range(1, 10), "Range Observable");
 		subscribePrint(Observable.empty(), "Empty Observable");
 		subscribePrint(Observable.never(), "Never Observable");
+		
+		subscribePrint(Observable.range(1, 10), "Range Observable");
 
 		try {
 			Thread.sleep(2000L);
