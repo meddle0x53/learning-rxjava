@@ -39,10 +39,10 @@ public class BackpressureExamples implements Program {
 		
 		Path path = Paths.get("src", "main", "resources");
 		
-		Observable<?> data = CreateObservable.listFolder(path, "*")
+		Observable<?> data = CreateObservable.listFolderViaUsing(path, "*")
 		.flatMap(file -> {
 			if (!Files.isDirectory(file)) {
-				return CreateObservable.from(file).subscribeOn(Schedulers.io());
+				return CreateObservable.fromViaUsing(file).subscribeOn(Schedulers.io());
 			}
 			
 			return Observable.empty();

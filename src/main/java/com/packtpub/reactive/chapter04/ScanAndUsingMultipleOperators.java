@@ -37,14 +37,14 @@ public class ScanAndUsingMultipleOperators implements Program {
 
 		subscribePrint(scan.last(), "Final sum");
 
-		Observable<String> file = CreateObservable.from(Paths.get("src",
+		Observable<String> file = CreateObservable.fromViaUsing(Paths.get("src",
 				"main", "resources", "letters.txt"));
 
 		scan = file.scan(0, (p, v) -> p + 1);
 
 		subscribePrint(scan.last(), "wc -l");
 
-		file = CreateObservable.from(Paths.get("src", "main", "resources",
+		file = CreateObservable.fromViaUsing(Paths.get("src", "main", "resources",
 				"operators.txt"));
 
 		Observable<String> multy = file

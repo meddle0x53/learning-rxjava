@@ -136,7 +136,7 @@ public class Lift implements Program {
 	public void run() {
 		Path path = Paths.get("src", "main", "resources", "letters.txt");
 		Observable<?> indexedStrings = CreateObservable
-				.from(path)
+				.fromViaUsing(path)
 				.lift(new Indexed<String>(1L));
 		
 		Helpers.subscribePrint(indexedStrings, "Indexed strings");

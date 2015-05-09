@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,6 +39,7 @@ import rx.functions.Func0;
 import rx.functions.Func1;
 import rx.observables.ConnectableObservable;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.Subscriptions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,15 +51,42 @@ import com.google.gson.GsonBuilder;
  */
 public class CreateObservable {
 
-	public static Observable<String> from(final Path path) {
+	public static Observable<String> fromViaUsing(final Path path) {
 		return Observable.<String, BufferedReader> using(
 			unchecked(() -> Files.newBufferedReader(path)),
 			reader -> from(reader).refCount(),
 			unchecked(reader -> reader.close()));
 	}
 
+	public static Observable<String> from(final Path path) {
+		return Observable.<String>create(subscriber -> {
+			try {
+				BufferedReader reader = Files.newBufferedReader(path);
+				subscriber.add(Subscriptions.create(() -> {
+					try {
+						reader.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}));
+				
+				String line = null;
+				while ((line = reader.readLine()) != null && !subscriber.isUnsubscribed()) {
+					subscriber.onNext(line);
+				}
+				if (!subscriber.isUnsubscribed()) {
+					subscriber.onCompleted();
+				}
+			} catch (IOException ioe) {
+				if (!subscriber.isUnsubscribed()) {
+					subscriber.onError(ioe);
+				}
+			}
+		});
+	}
+
 	public static Observable<String> from(final Path path, Scheduler scheduler) {
-		return from(path).subscribeOn(scheduler);
+		return fromViaUsing(path).subscribeOn(scheduler);
 	}
 
 	public static ConnectableObservable<String> from(final InputStream stream) {
@@ -97,6 +126,28 @@ public class CreateObservable {
 	}
 
 	public static Observable<Path> listFolder(Path dir, String glob) {
+		return Observable.<Path>create(subscriber -> {
+			try {
+				DirectoryStream<Path> stream =
+						Files.newDirectoryStream(dir, glob);
+				
+				subscriber.add(Subscriptions.create(() -> {
+					try {
+						stream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}));
+				Observable.<Path>from(stream).subscribe(subscriber);
+			} catch (DirectoryIteratorException ex) {
+				subscriber.onError(ex);
+			} catch (IOException ioe) {
+				subscriber.onError(ioe);
+			}
+		});
+	}
+
+	public static Observable<Path> listFolderViaUsing(Path dir, String glob) {
 		return Observable.<Path, DirectoryStream<Path>> using(
 			unchecked(() -> Files.newDirectoryStream(dir, glob)),
 			dirStream -> Observable.from(dirStream),
@@ -138,7 +189,7 @@ public class CreateObservable {
 		}
 		
 		public Observable<String> read() {
-			return from(this.filePath)
+			return fromViaUsing(this.filePath)
 					.onErrorResumeNext(Helpers::createFileOnNotFound);
 		}
 		

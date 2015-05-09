@@ -44,7 +44,7 @@ public class Compose implements Program {
 	public void run() {
 		Path path = Paths.get("src", "main", "resources", "letters.txt");
 		Observable<?> indexedStrings = CreateObservable
-				.from(path).compose(new OddFilter<String>());
+				.fromViaUsing(path).compose(new OddFilter<String>());
 		
 		Helpers.subscribePrint(indexedStrings, "Indexed strings");
 	}
