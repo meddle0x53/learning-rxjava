@@ -2,6 +2,7 @@ package com.packtpub.reactive.chapter04;
 
 import static com.packtpub.reactive.common.Helpers.subscribePrint;
 
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -10,6 +11,7 @@ import rx.Subscription;
 import rx.functions.Func0;
 import rx.functions.Func1;
 
+import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
 /**
@@ -72,11 +74,18 @@ public class MappingExamples implements Program {
 		subscribePrint(flatMapped, "flatMap");
 		System.out.println("-----------------");
 
-		flatMapped = Observable.just(5, 4).flatMap(v -> Observable.range(v, 2),
+		flatMapped = Observable.just(5, 432).flatMap(v -> Observable.range(v, 2),
 				(x, y) -> x + y);
 
 		subscribePrint(flatMapped, "flatMap");
 		System.out.println("-----------------");
+		
+		Observable<String> fsObs = CreateObservable.listFolder(
+				Paths.get("src", "main", "resources"),
+				"{lorem.txt,letters.txt}")
+				.flatMap(path -> CreateObservable.from(path), (path, line) -> path.getFileName() + " : " + line);
+
+		subscribePrint(fsObs, "FS");
 
 		Observable<?> fMapped = Observable.just(Arrays.asList(2, 4),
 				Arrays.asList("two", "four"), Arrays.asList('t', 'f'),
@@ -93,7 +102,7 @@ public class MappingExamples implements Program {
 		Observable<Object> obs = Observable
 				.interval(40L, TimeUnit.MILLISECONDS).switchMap(
 						v -> Observable.timer(0L, 10L, TimeUnit.MILLISECONDS)
-								.map(u -> v + u));
+								.map(u -> "Observable <" + (v + 1) + "> : " + (v + u)));
 
 		Subscription sub = subscribePrint(obs, "switchMap");
 

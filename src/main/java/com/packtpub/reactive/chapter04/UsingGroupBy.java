@@ -42,8 +42,8 @@ public class UsingGroupBy implements Program {
 
 		Observable
 				.from(albums)
-				.groupBy(album -> album.replaceAll("[^m|^M]", "").length(),
-						album -> album.replaceAll("[m|M]", "*"))
+				.groupBy(album -> album.replaceAll("[^mM]", "").length(),
+						album -> album.replaceAll("[mM]", "*"))
 				.subscribe(
 						obs -> subscribePrint(obs, obs.getKey()
 								+ " occurences of 'm'"));

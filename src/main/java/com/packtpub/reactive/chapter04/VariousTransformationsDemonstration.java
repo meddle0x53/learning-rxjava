@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Notification;
 import rx.Observable;
 import rx.Subscription;
 import rx.schedulers.TimeInterval;
@@ -42,10 +41,6 @@ public class VariousTransformationsDemonstration implements Program {
 				.timestamp();
 
 		subscribePrint(timestamp, "Timestamps");
-
-		Observable<Notification<Number>> materialized = Observable.from(list)
-				.materialize();
-		subscribePrint(materialized, "Materialized");
 
 		Observable<TimeInterval<Long>> timeInterval = Observable.timer(0L,
 				150L, TimeUnit.MILLISECONDS).timeInterval();

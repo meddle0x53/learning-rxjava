@@ -54,7 +54,7 @@ public class ScanAndUsingMultipleOperators implements Program {
 				.filter(array -> array.length > 0)
 				.map(array -> array[0])
 				.distinct()
-				.groupBy(word -> word.contains("'") || word.equals("God"))
+				.groupBy(word -> word.contains("'"))
 				.flatMap(
 						observable -> observable.getKey() ? observable
 								: observable.map(Introspector::decapitalize))
