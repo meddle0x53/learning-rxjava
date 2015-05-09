@@ -22,14 +22,14 @@ public class ReactiveSumV2 implements Program {
 	public static Observable<Double> varStream(final String varName,
 			Observable<String> input) {
 		final Pattern pattern = Pattern.compile("\\s*" + varName
-				+ "\\s*[:|=]\\s*(-?\\d+\\.?\\d*)$");
+				+ "\\s*[:|=]\\s*(-?\\d+\\.?\\d*)");
 
 		return input
-				.map(str -> pattern.matcher(str))
+				.map(pattern::matcher)
 				.filter(matcher -> matcher.matches()
 						&& matcher.group(1) != null)
 				.map(matcher -> matcher.group(1))
-				.map(str -> Double.parseDouble(str));
+				.map(Double::parseDouble);
 	}
 
 	public void reactiveSum(Observable<Double> a, Observable<Double> b) {

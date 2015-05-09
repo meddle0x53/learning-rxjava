@@ -1,11 +1,12 @@
 package com.packtpub.reactive.common;
 
+import static com.packtpub.reactive.common.checked.Uncheck.unchecked;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -40,7 +41,6 @@ import rx.schedulers.Schedulers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import static com.packtpub.reactive.common.checked.Uncheck.*;
 
 /**
  * Contains a set of methods for creating custom {@link Observable}s.
