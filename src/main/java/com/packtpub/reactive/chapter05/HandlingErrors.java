@@ -5,6 +5,8 @@ import static com.packtpub.reactive.common.Helpers.subscribePrint;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
+import rx.Observable.OnSubscribe;
+import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
 import com.packtpub.reactive.common.Program;
@@ -17,16 +19,47 @@ import com.packtpub.reactive.common.Program;
  */
 public class HandlingErrors implements Program {
 	
-	private int throwAnError = 3;
+	class FooException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+		public FooException() {
+			super("Foo!");
+		}
+	}
 
-	public int getThrowAnError() {
-		return throwAnError;
+	class BooException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+		public BooException() {
+			super("Boo!");
+		}
 	}
 	
-	public void setThrowAnError(int throwAnError) {
-		this.throwAnError = throwAnError;
-	}
+	class ErrorEmitter implements OnSubscribe<Integer> {
 
+		private int throwAnErrorCounter = 5;
+		
+		@Override
+		public void call(Subscriber<? super Integer> subscriber) {
+			subscriber.onNext(1);
+			subscriber.onNext(2);
+
+			if (throwAnErrorCounter > 4) {
+				throwAnErrorCounter--;
+				subscriber.onError(new FooException());
+				return;
+			}
+			if (throwAnErrorCounter > 0) {
+				throwAnErrorCounter--;
+				subscriber.onError(new BooException());
+				return;
+			}
+
+			subscriber.onNext(3);
+			subscriber.onNext(4);
+			subscriber.onCompleted();
+
+		}
+	}
+	
 	@Override
 	public String name() {
 		return "Examples of handling errors";
@@ -42,59 +75,38 @@ public class HandlingErrors implements Program {
 		
 		Observable<String> numbers = Observable.just("1", "2", "three", "4", "5");
 		
-		Observable<Integer> n = numbers.map(Integer::parseInt).onErrorReturn(e -> 3);
+		Observable<Integer> n = numbers.map(Integer::parseInt).onErrorReturn(e -> -1);
 
 		subscribePrint(n, "error returned");
+		
+		Observable<Integer> defaultOnError = Observable.just(5, 4, 3, 2, 1);
 
-		n = numbers.map(Integer::parseInt).onErrorResumeNext(e -> Observable.just(3, 4, 5));
+		n = numbers.map(Integer::parseInt).onErrorResumeNext(defaultOnError);
 
 		subscribePrint(n, "on error resume next");
 		
-		n = numbers.map(Integer::parseInt).onExceptionResumeNext(Observable.just(4, 5, 6));
+		n = numbers.map(Integer::parseInt).onExceptionResumeNext(defaultOnError);
 
 		subscribePrint(n, "on exception resume next");
 		
 		n = numbers.doOnNext(number -> {
 			assert !number.equals("three");
-			}).map(Integer::parseInt).onExceptionResumeNext(Observable.just(4, 5, 6));
+			}).map(Integer::parseInt).onExceptionResumeNext(defaultOnError);
 
 		
 		subscribePrint(n, "on exception resume next 2");
 
 		n = numbers.doOnNext(number -> {
 			assert !number.equals("three");
-			}).map(Integer::parseInt).onErrorResumeNext(Observable.just(5, 6, 7));
+			}).map(Integer::parseInt).onErrorResumeNext(defaultOnError);
 
 		subscribePrint(n, "on error resume next 2");
 		
+		subscribePrint(Observable.create(new ErrorEmitter()).retry(), "Retry");
 		
-		Observable<Integer> errors = Observable.<Integer>create(subscriber -> {
-			subscriber.onNext(1);
-			subscriber.onNext(2);
-			
-			if (getThrowAnError() > 4) {
-				setThrowAnError(getThrowAnError() - 1);
-				subscriber.onError(new RuntimeException("Foo!"));
-				return;
-			}
-			if (getThrowAnError() > 0) {
-				setThrowAnError(getThrowAnError() - 1);
-				subscriber.onError(new RuntimeException("Boo!"));
-				return;
-			}
-			
-			subscriber.onNext(3);
-			subscriber.onNext(4);
-			subscriber.onCompleted();
-		});
-		
-		subscribePrint(errors.retry(), "Retry");
-		
-		setThrowAnError(5);
-		
-		Observable<Integer> when = errors.retryWhen(attempts -> {
+		Observable<Integer> when = Observable.create(new ErrorEmitter()).retryWhen(attempts -> {
 			return attempts.flatMap(error -> {
-				if (error.getMessage().equals("Foo!")) {
+				if (error instanceof FooException) {
 					System.err.println("Delaying...");
 					return Observable.timer(1L, TimeUnit.SECONDS, Schedulers.immediate());
 				}
@@ -102,7 +114,7 @@ public class HandlingErrors implements Program {
 				return Observable.error(error);
 			});
 		}).retry((attempts, error) -> {
-			return error.getMessage().equals("Boo!") && attempts < 3;
+			return (error instanceof BooException) && attempts < 3;
 		});
 		
 		subscribePrint(when, "retryWhen");

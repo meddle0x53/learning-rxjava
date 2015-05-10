@@ -1,14 +1,13 @@
 package com.packtpub.reactive.chapter05;
 
-import static com.packtpub.reactive.common.Helpers.subscribePrint;
+import static com.packtpub.reactive.common.Helpers.blockingSubscribePrint;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -18,7 +17,6 @@ import rx.Observable;
 import rx.apache.http.ObservableHttp;
 
 import com.google.gson.Gson;
-import com.packtpub.reactive.common.CreateObservable;
 import com.packtpub.reactive.common.Program;
 
 /**
@@ -39,7 +37,7 @@ public class HttpRequestsExample implements Program {
 		return 5;
 	}
 	
-	private Map<String, Set<Map<String, Object>>> cache = new HashMap<>();
+	private Map<String, Set<Map<String, Object>>> cache = new ConcurrentHashMap<>();
 	
 	public Observable<Map<String, Object>> fromCache(String url) {
 		return Observable.from(getCache(url)).defaultIfEmpty(null)
@@ -65,37 +63,10 @@ public class HttpRequestsExample implements Program {
 
 			Observable<Map> resp = githubUserInfoRequest(client, username);
 			
-			subscribePrint(resp
+			blockingSubscribePrint(resp
 					.map(json -> json.get("name") + "(" + json.get("language") + ")")
 					, "Json");
-
-
-			CountDownLatch latch = new CountDownLatch(1);
-
-			resp = githubUserInfoRequest(client, username);
 			
-			Observable<String> starGazers = resp
-				.map(json -> json.get("stargazers_url"))
-				.cast(String.class)
-				.flatMap(stargazersUrl -> requestJson(client, stargazersUrl))
-				.filter(json -> json.containsKey("login"))
-				.map(json -> json.get("login"))
-				.cast(String.class)
-				.filter(user -> !user.equals(username))
-				.distinct()
-				.take(5)
-				.flatMap(supporter -> githubUserInfoRequest(client, supporter).take(3))
-				.filter(json -> json.containsKey("full_name"))
-				.map(json -> json.get("full_name"))
-				.cast(String.class)
-				.doOnCompleted(() -> latch.countDown());
-			
-			subscribePrint(starGazers, "Star Gazers");
-
-
-			try {
-				latch.await();
-			} catch (InterruptedException e) {}
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
@@ -110,11 +81,10 @@ public class HttpRequestsExample implements Program {
 
 		String url = "https://api.github.com/users/" + githubUser + "/repos";
 
-		Observable<Map> response = CreateObservable.requestJson(client, url);
+		Observable<Map> response = requestJson(client, url);
 		return response
-				.filter(json -> ((Map) json).containsKey("private"))
-				.filter(json -> ((Map) json).get("private").equals(false))
-				.filter(json -> ((Map) json).get("fork").equals(false));
+				.filter(json -> json.containsKey("git_url"))
+				.filter(json -> json.get("fork").equals(false));
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -124,7 +94,7 @@ public class HttpRequestsExample implements Program {
 						.createGet(url, client)
 						.toObservable()
 						.flatMap(resp -> resp.getContent()
-								.map(bytes -> new String(bytes)))
+								.map(bytes -> new String(bytes, java.nio.charset.StandardCharsets.UTF_8)))
 								.retry(5)
 								.cast(String.class)
 								.map(String::trim)
@@ -137,12 +107,12 @@ public class HttpRequestsExample implements Program {
 		Observable<String> arrays = rawResponse
 						.filter(data -> data.startsWith("["));
 		
-		Observable<Map> response = arrays.concatWith(objects)
+		Observable<Map> response = arrays.ambWith(objects)
 						.map(data -> {
 							return new Gson().fromJson(data, List.class);
 						}).flatMapIterable(list -> list)
 						.cast(Map.class)
-						.doOnNext(json -> getCache(url).add((Map) json));
+						.doOnNext(json -> getCache(url).add(json));
 
 		return Observable.amb(fromCache(url), response);
 	}

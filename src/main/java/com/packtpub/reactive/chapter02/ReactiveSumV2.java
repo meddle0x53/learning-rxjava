@@ -35,7 +35,7 @@ public class ReactiveSumV2 implements Program {
 	public void reactiveSum(Observable<Double> a, Observable<Double> b) {
 
 		Observable
-		.combineLatest(a, b, (x, y) -> x + y)
+		.combineLatest(a.startWith(0.0), b.startWith(0.0), (x, y) -> x + y)
 		.subscribeOn(Schedulers.io())
 		.subscribe(
 				sum -> System.out.println("update : a + b = " + sum),
