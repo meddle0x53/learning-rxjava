@@ -47,7 +47,7 @@ public class SubscribeOnAndObserveOn implements Program {
 				.map(n -> Character.toChars(n))
 				.map(c -> c[0])
 				.doOnEach(debug("Chars ", "    "))
-				.doOnCompleted(() -> latch.countDown());
+				.finallyDo(() -> latch.countDown());
 		
 		chars.subscribe();
 

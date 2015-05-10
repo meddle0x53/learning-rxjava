@@ -49,7 +49,10 @@ public class BackpressureExamples implements Program {
 		});
 		
 		Helpers.subscribePrint(
-				data.sample(Observable.interval(90L, TimeUnit.MILLISECONDS))
+				data.sample(Observable.interval(
+						100L, TimeUnit.MILLISECONDS).take(10)
+						.concatWith(Observable.interval(
+								200L, TimeUnit.MILLISECONDS)))
 				.doOnCompleted(() -> latch.countDown()),
 				"sample(Observable)");
 
@@ -57,20 +60,19 @@ public class BackpressureExamples implements Program {
 				data.throttleLast(100L, TimeUnit.MILLISECONDS)
 				.doOnCompleted(() -> latch.countDown()),
 				"throttleLast(long, TimeUnit)");
-		
 		Observable<Object> sampler = Observable.create(subscriber -> {
 			subscriber.onNext(0);
 			
 			try {
-				Thread.sleep(10L);
+				Thread.sleep(100L);
 
 				subscriber.onNext(10);
 
-				Thread.sleep(20L);
+				Thread.sleep(200L);
 
-				subscriber.onNext(20);
+				subscriber.onNext(200);
 				
-				Thread.sleep(15L);
+				Thread.sleep(150L);
 				subscriber.onCompleted();
 			} catch (Exception e) {
 				subscriber.onError(e);
@@ -79,7 +81,7 @@ public class BackpressureExamples implements Program {
 		
 
 		Helpers.subscribePrint(
-				data.sample(sampler).debounce(15L, TimeUnit.MILLISECONDS)
+				data.sample(sampler).debounce(150L, TimeUnit.MILLISECONDS)
 				.doOnCompleted(() -> latch.countDown()),
 				"sample(Observable).debounce(long, TimeUnit)");
 		

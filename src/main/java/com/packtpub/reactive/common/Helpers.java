@@ -68,13 +68,13 @@ public final class Helpers {
 				break;
 			case OnError:
 				System.err.println(Thread.currentThread().getName() + 
-						"|" + description + ":X" + offset +
-						nextOffset.get() + " " + notification.getThrowable());
+						"|" + description + ": " + offset +
+						nextOffset.get() + " X " + notification.getThrowable());
 				break;
 			case OnCompleted:
 				System.out.println(Thread.currentThread().getName() + 
-						"|" + description + ":|" + offset +
-						nextOffset.get()
+						"|" + description + ": " + offset +
+						nextOffset.get() + "|"
 						);
 				break;
 			default:

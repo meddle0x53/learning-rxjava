@@ -3,7 +3,6 @@ package com.packtpub.reactive.chapter06;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Scheduler;
@@ -20,7 +19,7 @@ import com.packtpub.reactive.common.Program;
  */
 public class SchedulersTypes implements Program {
 	
-	private CountDownLatch latch = new CountDownLatch(10);
+
 
 	@Override
 	public String name() {
@@ -42,7 +41,7 @@ public class SchedulersTypes implements Program {
 
 		Action0 addWork = () -> {
 
-			synchronized (current) {
+			synchronized (list) {
 				System.out.println("  Add : " + Thread.currentThread().getName() + " " + current.get());
 				list.add(random.nextInt(current.get()));
 				System.out.println("  End add : " + Thread.currentThread().getName() + " " + current.get());
@@ -53,17 +52,15 @@ public class SchedulersTypes implements Program {
 
 		Action0 removeWork = () -> {
 
-			synchronized (current) {
+			synchronized (list) {
 				if (!list.isEmpty()) {
 					System.out.println("  Remove : " + Thread.currentThread().getName());
 					list.remove(0);
 					System.out.println("  End remove : " + Thread.currentThread().getName());
-				} else {
-					latch.countDown();
+
 				}
 			}
 
-			
 		};
 
 
@@ -84,16 +81,15 @@ public class SchedulersTypes implements Program {
 			
 			while (!list.isEmpty()) {
 				System.out.println("Begin remove!");
-					
+
 				if (onTheSameWorker) {
 					worker.schedule(removeWork);
 				} else {
 					scheduler.createWorker().schedule(removeWork);
 				}
-				
+
 				System.out.println("End remove!");
 			}
-			
 		};
 		
 		worker.schedule(work);
@@ -106,30 +102,53 @@ public class SchedulersTypes implements Program {
 		schedule(Schedulers.immediate(), 2, true);
 		System.out.println("Spawn!");
 		schedule(Schedulers.immediate(), 2, false);
+		try { Thread.sleep(1000L); } catch (InterruptedException e) {}
+		
+		System.out.println("------");
 
 		System.out.println("Trampoline");
 		schedule(Schedulers.trampoline(), 2, true);
 		System.out.println("Spawn!");
 		schedule(Schedulers.trampoline(), 2, false);
-		
+		try { Thread.sleep(1000L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("New thread");
 		schedule(Schedulers.newThread(), 2, true);
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("Spawn!");
 		schedule(Schedulers.newThread(), 2, false);
-		
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("Computation thread");
 		schedule(Schedulers.computation(), 5, true);
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("Spawn!");
 		schedule(Schedulers.computation(), 5, false);
-		
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("IO thread");
 		schedule(Schedulers.io(), 2, true);
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
+
+		System.out.println("------");
+
 		System.out.println("Spawn!");
 		schedule(Schedulers.io(), 2, false);
+		try { Thread.sleep(500L); } catch (InterruptedException e) {}
 		
-		try {
-			latch.await();
-		} catch (InterruptedException e) {}
+		
 	}
 	
 	public static void main(String[] args) {

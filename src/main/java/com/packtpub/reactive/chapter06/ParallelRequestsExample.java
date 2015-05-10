@@ -53,7 +53,7 @@ public class ParallelRequestsExample implements Program {
 						.map(json -> json.get("login") +  " : " + json.get("followers"))
 			)
 			.doOnNext(follower -> System.out.println(follower))
-			.reduce(0.0, (sum, cur) -> sum + 1)
+			.count()
 			.doOnCompleted(() -> latch.countDown())
 			.subscribe(sum -> System.out.println("meddle0x53 : " + sum));
 
