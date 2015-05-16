@@ -63,15 +63,14 @@ public class ResourceManagement implements Program {
 	@Override
 	public void run() {
 		
-		String url = "https://api.github.com/orgs/proactjs/repos";
+		String url = "https://api.github.com/orgs/ReactiveX/repos";
 		Observable<ObservableHttpResponse> response = request(url);
 		
 		System.out.println("Not yet subscribed.");
 		Observable<String> stringResponse = response
-				.flatMap(resp -> resp.getContent()
-				.map(bytes -> new String(bytes)))
+				.<String>flatMap(resp -> resp.getContent()
+				.map(bytes -> new String(bytes, java.nio.charset.StandardCharsets.UTF_8)))
 				.retry(5)
-				.cast(String.class)
 				.map(String::trim)
 				.cache();
 

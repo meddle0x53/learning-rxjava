@@ -91,19 +91,21 @@ public class Lift implements Program {
 	}
 	
 	public static class Indexed<T> implements Operator<Pair<Long, T>, T> {
-		private long index;
+		 final private long initialIndex;
 		
 		public Indexed() {
 			this(0L);
 		}
 
 		public Indexed(long initial) {
-			this.index = initial;
+			this.initialIndex = initial;
 		}
 
 		@Override
 		public Subscriber<? super T> call(Subscriber<? super Pair<Long, T>> s) {
-			return new Subscriber<T>() {
+			return new Subscriber<T>(s) {
+				private long index = initialIndex;
+				
 				@Override
 				public void onCompleted() {
 					s.onCompleted();
@@ -140,6 +142,14 @@ public class Lift implements Program {
 				.lift(new Indexed<String>(1L));
 		
 		Helpers.subscribePrint(indexedStrings, "Indexed strings");
+		
+		Observable<Pair<Long, String>> indexed =
+				Observable.zip(
+						Observable.just("a", "b", "c", "d", "e"),
+						Observable.range(0, 100),
+						(s, i) -> new Pair<Long, String>((long) i, s));
+		
+		Helpers.subscribePrint(indexed, "Indexed, no lift");
 	}
 	
 	public static void main(String[] args) {

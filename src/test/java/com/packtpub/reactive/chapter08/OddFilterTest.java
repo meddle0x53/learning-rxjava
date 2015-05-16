@@ -22,14 +22,14 @@ public class OddFilterTest {
 	@Test
 	public void testFiltersOddOfTheSequence() {
 		
-		Observable<Integer> tested = Observable
-				.range(2, 10)
-				.compose(new OddFilter<Integer>());
+		Observable<String> tested = Observable
+				.just("One", "Two", "Three", "Four", "Five", "June", "July")
+				.compose(new OddFilter<String>());
 		
-		List<Integer> expected =
-				Arrays.asList(2, 4, 6, 8, 10);
+		List<String> expected =
+				Arrays.asList("One", "Three", "Five", "July");
 		
-		List<Integer> actual = tested
+		List<String> actual = tested
 				.toList()
 				.toBlocking()
 				.single();

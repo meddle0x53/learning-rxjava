@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import rx.Observable;
+import rx.observers.TestSubscriber;
 
 import com.packtpub.reactive.chapter08.Lift.Indexed;
 import com.packtpub.reactive.chapter08.Lift.Pair;
@@ -39,6 +40,13 @@ public class IndexedTest {
 				single();
 		
 		assertEquals(expected, actual);
+		
+		// The same result the second time around
+		TestSubscriber<Pair<Long, String>> testSubscriber = new TestSubscriber<Pair<Long, String>>();
+		observable.subscribe(testSubscriber);
+		
+		testSubscriber.assertReceivedOnNext(expected);
+		
 	}
 
 }
