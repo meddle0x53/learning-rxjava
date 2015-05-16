@@ -38,10 +38,10 @@ public class CreateObservableIntervalTest {
 		
 		assertTrue(subscriber.getOnNextEvents().isEmpty());
 		
-		testScheduler.advanceTimeBy(100L, TimeUnit.MILLISECONDS);
+		testScheduler.advanceTimeBy(101L, TimeUnit.MILLISECONDS);
 		assertEquals(Arrays.asList(0L), subscriber.getOnNextEvents());
 		
-		testScheduler.advanceTimeBy(100L, TimeUnit.MILLISECONDS);
+		testScheduler.advanceTimeBy(101L, TimeUnit.MILLISECONDS);
 		assertEquals(Arrays.asList(0L, 1L), subscriber.getOnNextEvents());
 		
 		testScheduler.advanceTimeTo(1L, TimeUnit.SECONDS);

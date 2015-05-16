@@ -3,7 +3,6 @@ package com.packtpub.reactive.chapter07;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -39,20 +38,44 @@ public class SortedObservableTest {
 		expected = null;
 	}
 	
+	private class TestData {
+		private Throwable error = null;
+		private boolean completed = false;
+		private List<String> result = new ArrayList<String>();
+		
+		public void setError(Throwable error) {
+			this.error = error;
+		}
+
+		public boolean isCompleted() {
+			return completed;
+		}
+
+		public void setCompleted(boolean completed) {
+			this.completed = completed;
+		}
+
+		public List<String> getResult() {
+			return result;
+		}
+
+		public Throwable getError() {
+			return error;
+		}
+	}
+	
 	@Test
 	public void testUsingNormalSubscription() {
-		AtomicBoolean hasError = new AtomicBoolean(false);
-		AtomicBoolean isCompleted = new AtomicBoolean(false);
-		List<String> result = new ArrayList<String>(6);
+		TestData data = new TestData();
 		
 		tested.subscribe(
-				(v) -> result.add(v),
-				(e) -> hasError.set(true),
-				() -> isCompleted.set(true));
+				(v) -> data.getResult().add(v),
+				(e) -> data.setError(e),
+				() -> data.setCompleted(true));
 		
-		Assert.assertTrue(isCompleted.get());
-		Assert.assertFalse(hasError.get());
-		Assert.assertEquals(expected, result);
+		Assert.assertTrue(data.isCompleted());
+		Assert.assertNull(data.getError());
+		Assert.assertEquals(expected, data.getResult());
 	}
 	
 	@Test
@@ -71,7 +94,6 @@ public class SortedObservableTest {
 		Assert.assertSame(1, subscriber.getOnCompletedEvents().size());
 		Assert.assertTrue(subscriber.getOnErrorEvents().isEmpty());
 		Assert.assertTrue(subscriber.isUnsubscribed());
-		Assert.assertSame(Thread.currentThread(), subscriber.getLastSeenThread());
 	}
 	
 	@Test

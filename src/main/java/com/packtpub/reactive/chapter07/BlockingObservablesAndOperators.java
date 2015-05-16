@@ -57,14 +57,14 @@ public class BlockingObservablesAndOperators implements Program {
 		System.out.println(iterator.next());
 		
 		Iterable<Long> latest = Observable
-				.interval(100L, TimeUnit.MILLISECONDS)
+				.interval(1000L, TimeUnit.MILLISECONDS)
 				.toBlocking()
 				.latest();
 		iterator = latest.iterator();
 		System.out.println(iterator.next());
 		
 		try {
-			Thread.sleep(500L);
+			Thread.sleep(5500L);
 		} catch (InterruptedException e) {}
 		System.out.println(iterator.next());
 		System.out.println(iterator.next());
