@@ -112,7 +112,7 @@ public class HttpRequestsExample implements Program {
 							return new Gson().fromJson(data, List.class);
 						}).flatMapIterable(list -> list)
 						.cast(Map.class)
-						.doOnNext(json -> getCache(url).add(json));
+						.doOnNext(json -> getCache(url).add((Map<String, Object>) json));
 
 		return Observable.amb(fromCache(url), response);
 	}

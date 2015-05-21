@@ -37,17 +37,18 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
 
-task(rxrun, dependsOn: 'classes') << {
-    def classpath = sourceSets.main.runtimeClasspath
+task (execute, dependsOn: 'classes') << {
+   def cl = 'com.packtpub.reactive.chapter0' + chapter + '.' + example
+   def classpath = sourceSets.main.runtimeClasspath
 
     def command = [
         'java',
         '-ea',
         '-cp', classpath.collect().join(System.getProperty('path.separator')),
-        'com.packtpub.reactive.chapter01.ReactiveSumV1',
+        cl,
         '--color'
     ]
-
+    
     def proc = new ProcessBuilder(command)
         .redirectOutput(ProcessBuilder.Redirect.INHERIT)
         .redirectInput(ProcessBuilder.Redirect.INHERIT)
@@ -57,7 +58,7 @@ task(rxrun, dependsOn: 'classes') << {
     proc.waitFor()
 
     if (0 != proc.exitValue()) {
-        throw new RuntimeException("console exited with status: ${proc.exitValue()}")
+        throw new RuntimeException("Program exited with status: ${proc.exitValue()}!")
     }
 }
 
