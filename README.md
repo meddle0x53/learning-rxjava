@@ -19,6 +19,13 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
    
  * This will download and install all the dependencies needed by the project and will compile it.
  * You can open the project with Eclipse and run the examples. You'll need the Gradle plugin for Eclipse.
+ * 
+ 
+### Running example from console
+
+ ```bash
+ gradle execute -Pchapter=1 -Pexample=ReactiveSumV1
+ ```
  
 ## Examples
 Here are the descriptions of all the examples in the book.
