@@ -19,7 +19,6 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
    
  * This will download and install all the dependencies needed by the project and will compile it.
  * You can open the project with Eclipse and run the examples. You'll need the Gradle plugin for Eclipse.
- * 
  
 ### Running example from console
 
@@ -30,56 +29,56 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
 ## Examples
 Here are the descriptions of all the examples in the book.
 
-#### 01. Iterator VS Observable (Chapter 1, pages 5)
+#### 01. Iterator VS Observable
 This example is used in the book in the 'Comparing the Iterator pattern and the RxJava Observable' of the first chapter.
 It demonstrates the difference between RxJava's Observables and the Iterators, by iterating over a list of strings.
 The `Observable.from` method is introduced here for the first time, as well as subscribing.
 
 The example can be found here [ObservableVSIterator](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ObservableVSIterator.java)
 
-#### 02. Reactive Sum, version 1 (Chapter 1, pages 10)
+#### 02. Reactive Sum, version 1
 This is example demonstrates a reactive sum, which is updated on change of any of its collectors. It is demonstrates
 many of the features of RxJava, like Observers, Schedulers Observable transformations, filtering and combining.
 
 The example can be found here [ReactiveSumV1](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter01/ReactiveSumV1.java)
 
-#### 03. Introduction to the new syntax and semantics (Chapter 2, pages 17-22)
+#### 03. Introduction to the new syntax and semantics
 Demonstrates creating and using lambdas, passing them to methods, that receive Functional Interfaces as parameters and references
 to existing methods.
 
 The example can be found here [Java8LambdasSyntaxIntroduction](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Java8LambdasSyntaxIntroduction.java)
 
-#### 04. Reactive Sum, version 2 (with lambdas) (Chapter 2, pages 22-24)
+#### 04. Reactive Sum, version 2 (with lambdas)
 Another implementation of the 'Reactive Sum', similar to the on of the first chapter, but it uses the new Java 8 syntax with lambdas.
 
 The example can be found here [ReactiveSumV2](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ReactiveSumV2.java)
  
-#### 05. Pure and higher functions (Chapter 2, pages 26-29)
+#### 05. Pure and higher functions
 Demonstrates pure and higher order functions. Applies higher order functions to other functions.
 
 The example can be found here [PureAndHigherOrderFunctions](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/PureAndHigherOrderFunctions.java)
 
-#### 06. Introduction to monads (Chapter 2, pages 30-33)
+#### 06. Introduction to monads
 Shows implementation and uses of a monad. The Optional monad.
 
 The example can be found here [Monads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/Monads.java)
  
-#### 07. Observables and monads (Chapter 2, pages 34)
+#### 07. Observables and monads
 Shows that Observables are not true monads. They are monad-like structures though and benefit from that.
 
 The example can be found here [ObservablesAndMonads](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter02/ObservablesAndMonads.java)
  
-#### 08. Creating Observables with Observable.from (Chapter 3, pages 39-40)
+#### 08. Creating Observables with Observable.from
 A set of examples of using the Observable.from method for creating Observables from collections, arrays and Iterables.
 
 The example can be found here [CreatingObservablesWithFrom](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFrom.java)
 
-#### 09. Using Observable.from with Future (Chapter 3, pages 40-42)
+#### 09. Using Observable.from with Future
 Demonstrates creating Observables using the Observable.from(Future) method.
 
 The example can be found here [CreatingObservablesWithFromFuture](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesWithFromFuture.java)
 
-#### 10. Using the Observable.just method to create Observables (Chapter 3, pages 42-43)
+#### 10. Using the Observable.just method to create Observables
 Demonstrates creating Observables using the Observable.just method.
 
 The example can be found here [CreatingObservablesUsingJust](https://github.com/meddle0x53/learning-rxjava/blob/master/src/main/java/com/packtpub/reactive/chapter03/CreatingObservablesUsingJust.java)
