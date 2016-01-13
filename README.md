@@ -4,7 +4,6 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
 ## Installing and running this program.
  * Of course you'll need Git :).
  * To run these examples you need Java 8, if you don't have it, navigate to Oracle's site and download/install it.
- * The other necessary thing is Gradle 2.x, you can download it from here - [https://gradle.org/downloads](https://gradle.org/downloads).
  * Now you can clone this project by running :
  
    ```
@@ -14,7 +13,7 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
  * Navigate to the root of the project (`cd learning-rxjava`) and run :
  
    ```
-     gradle build
+     ./gradlew build
    ```
    
  * This will download and install all the dependencies needed by the project and will compile it.
@@ -22,8 +21,8 @@ This project contains the examples of the 'Learning Reactive Programming With Ja
  
 ### Running example from console
 
- ```bash
- gradle execute -Pchapter=1 -Pexample=ReactiveSumV1
+ ```bashgra
+ ./gradlew execute -Pchapter=1 -Pexample=ReactiveSumV1
  ```
  
 ## Examples
